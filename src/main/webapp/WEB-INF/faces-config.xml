@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    
+    <!-- ================== FERIADO CONFIGURATION ================== -->
+    <!-- Listar feriados -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>feriados-list</from-outcome>
+            <to-view-id>/feriados-list.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Cadastrar novo feriado -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>feriados-new</from-outcome>
+            <to-view-id>/feriados-new.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- ====================== CIDADES CONFIGURATION ====================== -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>cidades-list</from-outcome>
+            <to-view-id>/cidades-list.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Detalhes da cidade -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>cidades-details</from-outcome>
+            <to-view-id>/cidades-details.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Cadastrar nova cidade -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>cidades-new</from-outcome>
+            <to-view-id>/cidades-new.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Cadastrar novo setor -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>cidades-new-jurisdicao</from-outcome>
+            <to-view-id>/cidades-new-jurisdicao.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Cadastrar novo feriado municipal -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>cidades-new-feriadomunicipal</from-outcome>
+            <to-view-id>/cidades-new-feriadomunicipal.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    
+    <!-- ========================== MANAGED BEANS ========================== -->
+    <managed-bean>
+        <managed-bean-name>FeriadoView</managed-bean-name>
+        <managed-bean-class>creago.dfisc.afg.sifis.planejamento.beans.FeriadoBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>CidadeView</managed-bean-name>
+        <managed-bean-class>creago.dfisc.afg.sifis.planejamento.beans.CidadeBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+</faces-config>

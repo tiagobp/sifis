@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="common/common-layout.xhtml">
+            <ui:define name="content">
+                <h1 class="page-heading">#{CidadeView.selectedCidade.nome} <small>Adicionar jurisdição</small></h1>
+                <!-- End page heading -->
+
+                <!-- Begin breadcrumb -->
+                <ol class="breadcrumb default square rsaquo sm">
+                    <li><a href="index.xhtml"><i class="fa fa-home"></i></a></li>
+                    <li><a href="cidades-list.xhtml">Lista de cidades</a></li>
+                    <li><a href="cidades-details.xhtml">Detalhes da cidade</a></li>
+                    <li class="active">Nova jurisdição</li>
+                </ol>
+                <!-- End breadcrumb -->
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Adicionar jurisdição</h4>
+                    </div>
+                    <h:form id="setorForm">
+                        <div class="the-box">
+                            <div class="form-group">
+                                <h:outputLabel for="nome"
+                                               value="Jurisdição:"
+                                               style="font-weight: bold"/><br/>
+                                <p:inputText id="nome"
+                                             required="true" style="width: 100%"
+                                             value="#{CidadeView.jurisdicao.nome}"
+                                             requiredMessage="Informe a nova jurisdição"
+                                             label="nome"/>
+                                <p:message for="nome" />
+                            </div>
+
+                            <p:commandButton id="cadastrar"
+                                             value="Cadastrar"
+                                             styleClass="btn btn-success btn-rounded-lg"
+                                             action="#{CidadeView.saveJurisdicao()}"
+                                             ajax="false"/>&nbsp;
+                            <p:commandButton id="resetar"
+                                             styleClass="btn btn-danger btn-rounded-lg"
+                                             value="Limpar"
+                                             type="reset"
+                                             ajax="false"/>
+                        </div>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

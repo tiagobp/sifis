@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/06/2014 11:59:14 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+  <class catalog="sifis" name="creago.dfisc.afg.sifis.planejamento.entities.Usuario" table="usuario">
+    <id name="idusuario" type="java.lang.Long">
+      <column name="idusuario"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="creago.dfisc.afg.sifis.planejamento.entities.Fiscal" fetch="select" name="fiscal">
+      <column name="fiscal_idfiscal"/>
+    </many-to-one>
+    <property name="username" type="string">
+      <column length="45" name="username" not-null="true"/>
+    </property>
+    <property name="password" type="string">
+      <column length="45" name="password" not-null="true"/>
+    </property>
+    <property name="authority" type="string">
+      <column length="45" name="authority" not-null="true"/>
+    </property>
+    <property name="nome" type="string">
+      <column length="45" name="nome" not-null="true"/>
+    </property>
+    <property name="sobrenome" type="string">
+      <column length="45" name="sobrenome" not-null="true"/>
+    </property>
+    <property name="matricula" type="integer">
+      <column name="matricula" not-null="true"/>
+    </property>
+    <property name="email" type="string">
+      <column length="45" name="email" not-null="true"/>
+    </property>
+    <property name="avatar" type="string">
+      <column length="45" name="avatar"/>
+    </property>
+  </class>
+</hibernate-mapping>
