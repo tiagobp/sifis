@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <body>
+        <ui:composition>
+
+            <!-- BEGIN SIDEBAR LEFT -->
+            <div class="sidebar-left sidebar-nicescroller">
+                <ul class="sidebar-menu">
+                    <li>
+                        <a href="index.xhtml">
+                            <i class="fa fa-dashboard icon-sidebar"></i>
+                            Painel
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#Cidades">
+                            <i class="fa fa-file-text icon-sidebar"></i>
+                            <i class="fa fa-angle-right chevron-icon-sidebar"></i>
+                            Cidades
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="cidades-list.xhtml">Listar cidades</a></li>
+                            <li><a href="#{CidadeView.newCidade()}.xhtml">Cadastrar nova cidade</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#Feriados">
+                            <i class="fa fa-calendar-o icon-sidebar"></i>
+                            <i class="fa fa-angle-right chevron-icon-sidebar"></i>
+                            Feriados
+                        </a>
+                         <ul class="submenu">
+                            <li><a href="feriados-list.xhtml">Listar feriados</a></li>
+                            <li><a href="#{FeriadoView.newFeriado()}.xhtml">Cadastrar novo feriado</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#Fiscais">
+                            <i class="fa fa-users icon-sidebar"></i>
+                            <i class="fa fa-angle-right chevron-icon-sidebar"></i>
+                            Fiscais
+                        </a>
+                         <ul class="submenu">
+                            <li><a href="fiscais-list.xhtml">Listar fiscais</a></li>
+                            <li><a href="#{FiscalView.novoFiscal()}.xhtml">Cadastrar novo fiscal</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#Rotas">
+                            <i class="fa fa-code-fork icon-sidebar"></i>
+                            <i class="fa fa-angle-right chevron-icon-sidebar"></i>
+                            Rotas
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="rotas-list.xhtml">Listar rotas</a></li>
+                            <li><a href="#{RotaView.novaRota()}.xhtml">Cadastrar nova rota</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#fakelink">
+                            <i class="fa fa-car icon-sidebar"></i>
+                            Viagens
+                        </a>
+                    </li>
+                    <li>
+                        <a href="planejamento-schedule.xhtml">
+                            <i class="fa  fa-calendar icon-sidebar"></i>
+                            Planejamento
+                        </a>
+                    </li>
+                    <li class="static">OUTROS SISTEMAS</li>
+                    <li>
+                        <a href="#fakelink">
+                            <i class="fa fa-file-text icon-sidebar"></i>
+                            <i class="fa fa-angle-right chevron-icon-sidebar"></i>
+                            Procedimentos
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="#fakelink">Listar procedimentos<span class="badge badge-success span-sidebar">5</span></a></li>
+                            <li><a href="#fakelink">Novo procedimento</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#fakelink">
+                            <i class="fa fa-envelope icon-sidebar"></i>
+                            <i class="fa fa-angle-right chevron-icon-sidebar"></i>
+                            Mensagens
+                            <span class="label label-danger span-sidebar">HOT</span>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="mail-contact.xhtml">Contatos</a></li>
+                            <li><a href="mail-inbox.xhtml">Entrada<span class="badge badge-success span-sidebar">5</span></a></li>
+                            <li><a href="mail-send.xhtml">Enviadas</a></li>
+                            <li><a href="mail-new.xhtml">Escrever</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#fakelink">
+                            <i class="fa fa-bell icon-sidebar"></i>
+                            Notificações
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#fakelink">
+                            <i class="fa fa-tasks icon-sidebar"></i>
+                            Tarefas
+                        </a>
+                    </li>
+
+                    <li class="static">CONFIGURAÇÕES DO SISTEMA</li>
+                    <li class="text-content">
+                        <div class="switch">
+                            <div class="onoffswitch blank">
+                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="alertme"/>
+                                <label class="onoffswitch-label" for="alertme">
+                                    <span class="onoffswitch-inner"></span>
+                                    <span class="onoffswitch-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+                        Alerta quando sistema cair
+                    </li>
+                    <li class="text-content">
+                        <div class="switch">
+                            <div class="onoffswitch blank">
+                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="autoupdate"/>
+                                <label class="onoffswitch-label" for="autoupdate">
+                                    <span class="onoffswitch-inner"></span>
+                                    <span class="onoffswitch-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+                        Atualização automática
+                    </li>
+                    <li class="text-content">
+                        <div class="switch">
+                            <div class="onoffswitch blank">
+                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="dailyreport"/>
+                                <label class="onoffswitch-label" for="dailyreport">
+                                    <span class="onoffswitch-inner"></span>
+                                    <span class="onoffswitch-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+                        Relatório diário de tarefas
+                    </li>
+                    <li class="text-content">
+                        <div class="switch">
+                            <div class="onoffswitch blank">
+                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="remembercomputer"/>
+                                <label class="onoffswitch-label" for="remembercomputer">
+                                    <span class="onoffswitch-inner"></span>
+                                    <span class="onoffswitch-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+                        Lembrar esse computador
+                    </li>
+                </ul>
+            </div><!-- /.sidebar-left -->
+            <!-- END SIDEBAR LEFT -->
+        </ui:composition>
+    </body>
+</html>

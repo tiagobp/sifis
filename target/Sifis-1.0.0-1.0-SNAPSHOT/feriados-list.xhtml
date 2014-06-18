@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="common/common-layout.xhtml">
+            <ui:define name="content">
+                <h1 class="page-heading">Feriados <small>Lista de feriados</small></h1>
+                <!-- End page heading -->
+
+                <!-- Begin breadcrumb -->
+                <ol class="breadcrumb default square rsaquo sm">
+                    <li><a href="index.xhtml"><i class="fa fa-home"></i></a></li>
+                    <li class="active">Lista de feriados</li>
+                </ol>
+                <!-- End breadcrumb -->
+
+                <!-- BEGIN DATA TABLE -->
+                <div class="the-box">
+                    <div class="table-responsive">
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Lista de feriados</h4>
+                            </div>
+                            <h:form id="feriadoNForm">
+                                <p:growl id="messages" showDetail="false"/>
+                                <p:dataTable id="feriadosTable"
+                                             var="feriados"
+                                             value="#{FeriadoView.feriados}"
+                                             editable="true"
+                                             widgetVar="feriadosTable"
+                                             emptyMessage="Nenhum feriado encontrado"
+                                             paginator="true"
+                                             style="text-align: center;"
+                                             rows="50"
+                                             rowsPerPageTemplate="10, 25, 50, 100"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             filteredValue="#{FeriadoView.filteredFeriados}">
+
+                                    <f:facet name="header">
+                                        <div align="right">
+                                            <p:outputPanel>
+                                                <h:outputText value="Pesquisa: " />
+                                                <p:inputText id="globalFilter"
+                                                             onkeyup="PF('feriadosTable').filter()"
+                                                             style="width:250px"
+                                                             placeholder="Nome do feriado..."/>
+                                            </p:outputPanel>
+                                        </div>
+                                    </f:facet>
+
+                                    <p:ajax event="rowEdit" listener="#{FeriadoView.onRowEdit}" update=":feriadoNForm:messages" />
+                                    <p:ajax event="rowEditCancel" listener="#{FeriadoView.onCancel}" update=":feriadoNForm:messages" />
+
+                                    <!-- Coluna com as datas dos feriados cadastrados -->
+                                    <p:column id="dataFNacional"
+                                              headerText="DATA"
+                                              rendered="true"
+                                              filterBy="#{feriados.data}"
+                                              filterMatchMode="contains"
+                                              filterStyle="display:none">
+                                        <p:cellEditor>
+                                            <f:facet name="output">
+                                                <h:outputText value="#{feriados.data}">
+                                                    <f:convertDateTime pattern="EEEE, dd/MM/yyyy"
+                                                                       timeZone="America/Sao_Paulo"/>
+                                                </h:outputText>
+                                            </f:facet>
+                                            <f:facet name="input">
+                                                <p:calendar id="inputData"
+                                                            locale="pt_BR"
+                                                            style="width:100%"
+                                                            showButtonPanel="true"
+                                                            effect="explode"
+                                                            navigator="true"
+                                                            required="true"
+                                                            requiredMessage="Informe a data do novo feriado"
+                                                            pattern="dd/MM/yyyy"
+                                                            value="#{feriados.data}"
+                                                            label="dataFNacional"/>
+                                            </f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <!-- Coluna com os nomes dos feriados cadastrados -->
+                                    <p:column id="nomeFNacional"
+                                              headerText="FERIADO"
+                                              rendered="true"
+                                              filterBy="#{feriados.nome}"
+                                              filterMatchMode="contains"
+                                              filterStyle="display:none">
+                                        <p:cellEditor>
+                                            <f:facet name="output">
+                                                <h:outputText value="#{feriados.nome}"/>
+                                            </f:facet>
+                                            <f:facet name="input">
+                                                <p:inputText id="nome"
+                                                             required="true"
+                                                             style="width:100%"
+                                                             value="#{feriados.nome}"
+                                                             requiredMessage="Informe o nome do novo feriado"/>
+                                            </f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column id="dataFixa"
+                                              headerText="DATA FIXA"
+                                              style="width:100px;">
+                                        <p:cellEditor>
+                                            <f:facet name="output">
+                                                <h:outputText value="SIM" rendered="#{feriados.isFixo}"/>
+                                                <h:outputText value="NÃO" rendered="#{not feriados.isFixo}"/>
+                                            </f:facet>
+                                            <f:facet name="input">
+                                                <p:selectBooleanCheckbox value="#{feriados.isFixo}"/>
+                                            </f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    
+                                    <p:column style="width:37px;">
+                                        <f:facet name="header">
+                                            <span class="ui-icon ui-icon-pencil" title="Editar"></span>
+                                        </f:facet>
+                                        <p:rowEditor id="editor" />
+                                        <p:tooltip for="editor" value="Editar"/>
+                                    </p:column>
+
+                                    <!-- Coluna com o botao de exclusão do feriado (renderizada) -->
+                                    <p:column style="width:37px;">
+                                        <f:facet name="header">
+                                            <span class="ui-icon ui-icon-trash" title="Excluir"></span>
+                                        </f:facet>
+                                        <p:commandLink id="deletButton"
+                                                       update=":feriadoNForm"
+                                                       action="#{FeriadoView.remove()}"
+                                                       styleClass="ui-icon ui-icon-trash"
+                                                       title="Excluir">
+                                            <f:setPropertyActionListener value="#{feriados}"
+                                                                         target="#{FeriadoView.selectedFeriado}" />
+                                        </p:commandLink>
+                                    </p:column>
+
+                                    <f:facet name="footer">
+                                        <div align="left" style="padding: 15px 25px;">
+                                            <p:commandButton id="novoFNacional"
+                                                             value="Cadastrar Novo Feriado"
+                                                             styleClass="btn btn-rounded-lg"
+                                                             action="#{FeriadoView.newFeriado()}"/>
+                                        </div>
+                                    </f:facet>
+                                </p:dataTable>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
