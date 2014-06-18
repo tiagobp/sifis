@@ -2,7 +2,7 @@ package creago.dfisc.afg.sifis.planejamento.beans;
 
 import creago.dfisc.afg.sifis.planejamento.entities.Feriado;
 import creago.dfisc.afg.sifis.planejamento.service.IFeriadoService;
-import creago.dfisc.afg.sifis.planejamento.service.impl.FeriadoService;
+import creago.dfisc.afg.sifis.planejamento.service.FeriadoService;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

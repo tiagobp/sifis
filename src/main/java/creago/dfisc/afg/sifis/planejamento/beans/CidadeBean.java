@@ -3,15 +3,16 @@ package creago.dfisc.afg.sifis.planejamento.beans;
 import creago.dfisc.afg.sifis.planejamento.entities.Cidade;
 import creago.dfisc.afg.sifis.planejamento.entities.Feriado;
 import creago.dfisc.afg.sifis.planejamento.entities.Jurisdicao;
-import creago.dfisc.afg.sifis.planejamento.service.ICidadeService;
-import creago.dfisc.afg.sifis.planejamento.service.IFeriadoService;
-import creago.dfisc.afg.sifis.planejamento.service.IJurisdicaoService;
+import creago.dfisc.afg.sifis.planejamento.service.CidadeService;
+import creago.dfisc.afg.sifis.planejamento.service.FeriadoService;
+import creago.dfisc.afg.sifis.planejamento.service.JurisdicaoService;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -33,22 +34,21 @@ public class CidadeBean implements Serializable {
     private List<Feriado> feriados;
     private Feriado selectedFeriado;
     private List<Feriado> filteredFeriados;
-    
-    //@Autowired
-    private ICidadeService cidadeService;
-    
-    //@Autowired
-    private IJurisdicaoService jurisdicaoService;
-    
-    //@Autowired
-    private IFeriadoService feriadoService;
+
+    @Autowired
+    private CidadeService cidadeService;
+
+    @Autowired
+    private JurisdicaoService jurisdicaoService;
+
+    @Autowired
+    private FeriadoService feriadoService;
 
 //    private final String persistenceUnitName = "Planejamento";
 //    private final SimpleEntityManager simpleEntityManager = new SimpleEntityManager(persistenceUnitName);
 //    private CidadeService service = new CidadeServiceImpl(simpleEntityManager);
 //    private JurisdicaoService jService = new JurisdicaoServiceImpl(simpleEntityManager);
 //    private FeriadoService fService = new FeriadoServiceImpl(simpleEntityManager);
-
     @PostConstruct
     private void init() {
         cidade = new Cidade();
@@ -65,7 +65,7 @@ public class CidadeBean implements Serializable {
     // CIDADE
     public String save() {
         cidade.setNome(cidade.getNome().toUpperCase());
-        cidadeService.create(cidade);
+        cidadeService.save(cidade);
         message("Cidade cadastrada com sucesso!");
         selectedCidade = cidade;
 
@@ -79,10 +79,8 @@ public class CidadeBean implements Serializable {
         return "cidades-new";
     }
 
-    public List<Cidade> findAll() {
-        cidades = cidadeService.findAll();
-
-        return cidades;
+    public Iterable<Cidade> findAll() {
+        return cidadeService.findAll();
     }
 
     public String remove() {
@@ -126,10 +124,10 @@ public class CidadeBean implements Serializable {
 
         Jurisdicao jur = jurisdicaoService.findOne(selectedJurisdicao.getIdjurisdicao());
         jurisdicaoService.delete(jur);
-        
+
         selectedCidade.getJurisdicaos().remove(selectedJurisdicao);
         message("Jurisdição excluída com sucesso!");
-        
+
         return "cidades-details";
     }
 

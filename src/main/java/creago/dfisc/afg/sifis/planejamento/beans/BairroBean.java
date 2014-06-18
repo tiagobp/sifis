@@ -1,14 +1,12 @@
 package creago.dfisc.afg.sifis.planejamento.beans;
 
 import creago.dfisc.afg.sifis.planejamento.entities.Bairro;
-import creago.dfisc.afg.sifis.planejamento.service.IBairroService;
+import creago.dfisc.afg.sifis.planejamento.service.BairroService;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 
 /**
@@ -22,7 +20,7 @@ public class BairroBean {
     private Bairro bairro;
 
     //@Autowired
-    private IBairroService bairroService;
+    private BairroService bairroService;
 
     @PostConstruct
     private void init() {
@@ -31,7 +29,7 @@ public class BairroBean {
 
     public String save() {
         try {
-            bairroService.create(bairro);
+            bairroService.save(bairro);
             message("Bairro cadastrado com sucesso!");
         } catch (IllegalArgumentException e) {
             message(e.getMessage());
@@ -52,11 +50,11 @@ public class BairroBean {
         this.bairro = bairro;
     }
 
-    public IBairroService getBairroService() {
+    public BairroService getBairroService() {
         return bairroService;
     }
 
-    public void setBairroService(IBairroService bairroService) {
+    public void setBairroService(BairroService bairroService) {
         this.bairroService = bairroService;
     }
 }
