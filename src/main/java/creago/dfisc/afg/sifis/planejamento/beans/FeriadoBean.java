@@ -9,16 +9,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author Tiago Borges Pereira
  */
-@Controller
-@Scope("request")
 public class FeriadoBean implements Serializable {
 
     private Feriado feriado;
@@ -26,7 +21,6 @@ public class FeriadoBean implements Serializable {
     private Feriado selectedFeriado;
     private List<Feriado> filteredFeriados;
     
-    @Autowired
     private IFeriadoService feriadoService;
     
     

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.common.base.Preconditions;
 
@@ -18,7 +17,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements IO
 
     private Class<T> clazz;
 
-    @Autowired
     private SessionFactory sessionFactory;
 
     // API

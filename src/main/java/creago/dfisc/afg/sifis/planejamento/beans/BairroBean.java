@@ -5,18 +5,12 @@ import creago.dfisc.afg.sifis.planejamento.service.IBairroService;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 
 /**
  *
  * @author Tiago Borges Pereira
  */
-@Component
-@Scope("request")
 public class BairroBean {
 
     private Bairro bairro;

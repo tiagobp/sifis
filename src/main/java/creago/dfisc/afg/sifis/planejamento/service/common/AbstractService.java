@@ -3,14 +3,12 @@ package creago.dfisc.afg.sifis.planejamento.service.common;
 import java.io.Serializable;
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
 import creago.dfisc.afg.sifis.planejamento.dao.common.IOperations;
 
 /**
  *
  * @author Tiago Borges Pereira
  */
-@Transactional
 public abstract class AbstractService<T extends Serializable> implements IOperations<T> {
 
     @Override

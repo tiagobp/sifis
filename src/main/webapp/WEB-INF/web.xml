@@ -24,29 +24,4 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>bootstrap</param-value>
     </context-param>
-    <!-- Spring -->
-    <context-param>
-        <param-name>contextClass</param-name>
-        <param-value>
-            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
-        </param-value>
-    </context-param>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>creago.dfisc.afg.sifis.utils.spring</param-value>
-    </context-param>
-    <listener>
-        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-    </listener> 
-    
-    <context-param>   
-        <param-name>com.sun.faces.writeStateAtFormEnd</param-name>   
-        <param-value>false</param-value>   
-    </context-param>  
 </web-app>
