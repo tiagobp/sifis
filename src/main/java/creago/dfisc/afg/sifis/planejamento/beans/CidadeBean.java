@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.apache.commons.collections.IteratorUtils;
 import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -95,7 +96,7 @@ public class CidadeBean implements Serializable {
     public void onRowEdit(RowEditEvent event) {
         Cidade cidadeAlterada = (Cidade) event.getObject();
         cidadeAlterada.setNome(cidadeAlterada.getNome().toUpperCase());
-        cidadeService.update(cidadeAlterada);
+        cidadeService.save(cidadeAlterada);
         message("Cidade Atualizada.");
     }
 
@@ -107,7 +108,7 @@ public class CidadeBean implements Serializable {
     public String saveJurisdicao() {
         jurisdicao.setCidade(selectedCidade);
         jurisdicao.setNome(jurisdicao.getNome().toUpperCase());
-        jurisdicaoService.create(jurisdicao);
+        jurisdicaoService.save(jurisdicao);
         selectedCidade.getJurisdicaos().add(jurisdicao);
         message("Jurisdição cadastrada com sucesso!");
 
@@ -122,8 +123,7 @@ public class CidadeBean implements Serializable {
 
     public String removeJurisdicao() {
 
-        Jurisdicao jur = jurisdicaoService.findOne(selectedJurisdicao.getIdjurisdicao());
-        jurisdicaoService.delete(jur);
+        jurisdicaoService.delete(selectedJurisdicao);
 
         selectedCidade.getJurisdicaos().remove(selectedJurisdicao);
         message("Jurisdição excluída com sucesso!");
@@ -134,7 +134,7 @@ public class CidadeBean implements Serializable {
     public void onRowEditJurisdicao(RowEditEvent event) {
         Jurisdicao jurisdicaoAlterada = (Jurisdicao) event.getObject();
         jurisdicaoAlterada.setNome(jurisdicaoAlterada.getNome().toUpperCase());
-        jurisdicaoService.update(jurisdicaoAlterada);
+        jurisdicaoService.save(jurisdicaoAlterada);
 
         FacesMessage msg = new FacesMessage("Jurisdicão Atualizada", null);
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -156,7 +156,7 @@ public class CidadeBean implements Serializable {
     }
 
     public List<Cidade> getCidades() {
-        cidades = findAll();
+        cidades = IteratorUtils.toList(findAll().iterator());
 
         return cidades;
     }

@@ -1,7 +1,6 @@
 package creago.dfisc.afg.sifis.planejamento.beans;
 
 import creago.dfisc.afg.sifis.planejamento.entities.Feriado;
-import creago.dfisc.afg.sifis.planejamento.service.IFeriadoService;
 import creago.dfisc.afg.sifis.planejamento.service.FeriadoService;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +16,12 @@ import org.springframework.stereotype.Controller;
 public class Main {
 
     @Autowired
-    static IFeriadoService feriadoService;
+    static FeriadoService feriadoService;
 
     public static void main(String[] args) {
 
         Feriado feriado = new Feriado("FeriadoSpring", new Date(), true);
 
-        feriadoService.create(feriado);
+        feriadoService.save(feriado);
     }
 }

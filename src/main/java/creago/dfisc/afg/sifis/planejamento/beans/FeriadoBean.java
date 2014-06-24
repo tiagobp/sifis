@@ -1,13 +1,13 @@
 package creago.dfisc.afg.sifis.planejamento.beans;
 
 import creago.dfisc.afg.sifis.planejamento.entities.Feriado;
-import creago.dfisc.afg.sifis.planejamento.service.IFeriadoService;
 import creago.dfisc.afg.sifis.planejamento.service.FeriadoService;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.apache.commons.collections.IteratorUtils;
 import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -25,22 +25,20 @@ public class FeriadoBean implements Serializable {
     private List<Feriado> feriados;
     private Feriado selectedFeriado;
     private List<Feriado> filteredFeriados;
-    
+
     @Autowired
-    private IFeriadoService feriadoService;
-    
-    
+    private FeriadoService feriadoService;
+
 //    private final String persistenceUnitName = "Planejamento";
 //    private final SimpleEntityManager simpleEntityManager = new SimpleEntityManager(persistenceUnitName);
 //    private FeriadoService service = new FeriadoServiceImpl(simpleEntityManager);
-
     @PostConstruct
     private void init() {
         feriado = new Feriado();
     }
 
     public String save() {
-        feriadoService.create(feriado);
+        feriadoService.save(feriado);
         message("Feriado cadastrado com sucesso!");
 
         feriados.add(feriado);
@@ -58,10 +56,8 @@ public class FeriadoBean implements Serializable {
         return "feriados-new";
     }
 
-    public List<Feriado> findAll() {
-        feriados = feriadoService.findAll();
-
-        return feriados;
+    public Iterable<Feriado> findAll() {
+        return feriadoService.findAll();
     }
 
     public String remove() {
@@ -77,7 +73,7 @@ public class FeriadoBean implements Serializable {
 
     public void onRowEdit(RowEditEvent event) {
         Feriado feriadoAlterado = (Feriado) event.getObject();
-        feriadoService.update(feriadoAlterado);
+        feriadoService.save(feriadoAlterado);
 
         FacesMessage msg = new FacesMessage("Feriado Atualizado", null);
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -97,7 +93,7 @@ public class FeriadoBean implements Serializable {
     }
 
     public List<Feriado> getFeriados() {
-        feriados = findAll();
+        feriados = IteratorUtils.toList(findAll().iterator());
 
         return feriados;
     }
@@ -122,11 +118,11 @@ public class FeriadoBean implements Serializable {
         this.filteredFeriados = filteredFeriados;
     }
 
-    public IFeriadoService getFeriadoService() {
+    public FeriadoService getFeriadoService() {
         return feriadoService;
     }
 
-    public void setFeriadoService(IFeriadoService feriadoService) {
+    public void setFeriadoService(FeriadoService feriadoService) {
         this.feriadoService = feriadoService;
     }
 }

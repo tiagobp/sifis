@@ -1,26 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
-<Context>
-    <WatchedResource>WEB-INF/web.xml</WatchedResource>
- 
-    <Resource
-        factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
-        name="jdbc/tomcatDataSource"
-        auth="Container"
-        type="javax.sql.DataSource"
-        initialSize="1"
-        maxActive="20"
-        maxIdle="3"
-        minIdle="1"
-        maxWait="5000"
-        username="root"
-        password="12345"
-        driverClassName="com.mysql.jdbc.Driver"
-        validationQuery="SELECT 'OK'"
-        testWhileIdle="true"
-        testOnBorrow="true"
-        numTestsPerEvictionRun="5"
-        timeBetweenEvictionRunsMillis="30000"
-        minEvictableIdleTimeMillis="60000"
-        url="jdbc:mysql://localhost:3306/sifis" />
- 
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/Sifis-1.0.0">
+  <WatchedResource>WEB-INF/web.xml</WatchedResource>
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="1" maxActive="20" maxIdle="3" maxWait="5000" minEvictableIdleTimeMillis="60000" minIdle="1" name="jdbc/tomcatDataSource" numTestsPerEvictionRun="5" password="12345" testOnBorrow="true" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/sifis" username="root" validationQuery="SELECT &apos;OK&apos;"/>
 </Context>
