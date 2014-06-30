@@ -5,42 +5,42 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:body>
         <ui:composition template="common/common-layout.xhtml">
             <ui:define name="content">
-                <h1 class="page-heading">Cidades <small>Cadastrar nova cidade</small></h1>
+                <h1 class="page-heading">Inspetorias <small>Cadastrar nova inspetoria</small></h1>
                 <!-- End page heading -->
 
                 <!-- Begin breadcrumb -->
                 <ol class="breadcrumb default square rsaquo sm">
                     <li><a href="index.xhtml"><i class="fa fa-home"></i></a></li>
-                    <li><a href="cidades-list.xhtml">Lista de cidades</a></li>
-                    <li class="active">Cadastrar nova cidade</li>
+                    <li><a href="inspetorias-list.xhtml">Lista de inspetorias</a></li>
+                    <li class="active">Cadastrar nova inspetoria</li>
                 </ol>
                 <!-- End breadcrumb -->
 
-                <div class="panel panel-success">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4 class="panel-title">Cadastrar nova cidade</h4>
+                        <h4 class="panel-title">Cadastrar nova inspetoria</h4>
                     </div>
-                    <h:form id="cidade">
-                        <div class="the-box">
+                    <h:form id="inspetoriaForm">
+                        <div class="the-box" style="border: none">
                             <div class="form-group">
-                                <!-- Nome do Feriado -->
                                 <h:outputLabel for="nome"
-                                               value="Nome da Cidade *:"
-                                               style="font-weight: bold"/><br/>
-                                <p:inputText id="nome"
-                                             required="true" style="width: 100%"
-                                             value="#{CidadeView.cidade.nome}"
-                                             requiredMessage="Informe o nome da nova cidade"
+                                               value="NOME:"
+                                               style="font-weight: bold"/>
+                                <p:inputText id="nome" style="width: 100%"
+                                             required="true"
+                                             value="#{inspetoriaBean.inspetoria.nome}"
+                                             requiredMessage="Informe o nome da nova inspetoria"
                                              label="nome"/>
                                 <p:message for="nome" />
                             </div>
                             <p:commandButton id="cadastrar"
-                                             styleClass="btn btn-success btn-rounded-lg"
+                                             styleClass="btn btn-primary btn-rounded-lg"
                                              value="Cadastrar"
-                                             action="#{CidadeView.create()}"
+                                             action="#{inspetoriaBean.create()}"
                                              ajax="false"/>&nbsp;
                             <p:commandButton id="resetar"
                                              value="Limpar"

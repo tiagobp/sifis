@@ -3,115 +3,122 @@ package creago.dfisc.afg.sifis.planejamento.beans;
 import creago.dfisc.afg.sifis.planejamento.entities.Cidade;
 import creago.dfisc.afg.sifis.planejamento.entities.Feriado;
 import creago.dfisc.afg.sifis.planejamento.entities.Jurisdicao;
-import creago.dfisc.afg.sifis.planejamento.service.ICidadeService;
-import creago.dfisc.afg.sifis.planejamento.service.IFeriadoService;
-import creago.dfisc.afg.sifis.planejamento.service.IJurisdicaoService;
+import creago.dfisc.afg.sifis.planejamento.facade.CidadeFacade;
+import creago.dfisc.afg.sifis.planejamento.facade.FeriadoFacade;
+import creago.dfisc.afg.sifis.planejamento.facade.JurisdicaoFacade;
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
+import javax.faces.bean.*;
 
 /**
  *
  * @author Tiago Borges Pereira
  */
-public class CidadeBean implements Serializable {
+@ViewScoped
+@ManagedBean
+public class CidadeBean extends AbstractBean implements Serializable {
 
+    //CIDADE
     private Cidade cidade;
     private List<Cidade> cidades;
     private Cidade selectedCidade;
     private List<Cidade> filteredCidades;
 
+    // JURISDIÇÃO
     private Jurisdicao jurisdicao;
     private List<Jurisdicao> jurisdicoes;
     private Jurisdicao selectedJurisdicao;
     private List<Jurisdicao> filteredJurisdicoes;
 
+    //FERIADO
     private Feriado feriado;
     private List<Feriado> feriados;
     private Feriado selectedFeriado;
     private List<Feriado> filteredFeriados;
-    
-    //@Autowired
-    private ICidadeService cidadeService;
-    
-    //@Autowired
-    private IJurisdicaoService jurisdicaoService;
-    
-    //@Autowired
-    private IFeriadoService feriadoService;
 
-//    private final String persistenceUnitName = "Planejamento";
-//    private final SimpleEntityManager simpleEntityManager = new SimpleEntityManager(persistenceUnitName);
-//    private CidadeService service = new CidadeServiceImpl(simpleEntityManager);
-//    private JurisdicaoService jService = new JurisdicaoServiceImpl(simpleEntityManager);
-//    private FeriadoService fService = new FeriadoServiceImpl(simpleEntityManager);
+    //FACADE
+    private CidadeFacade cidadeFacade;
+    private JurisdicaoFacade jurisdicaoFacade;
+    private FeriadoFacade feriadoFacade;
 
-    @PostConstruct
-    private void init() {
-        cidade = new Cidade();
-        jurisdicao = new Jurisdicao();
-        feriado = new Feriado();
+    //FACADE GETTERS
+    public CidadeFacade getCidadeFacade() {
+        if (cidadeFacade == null) {
+            cidadeFacade = new CidadeFacade();
+        }
+        return cidadeFacade;
     }
 
-    private void message(String msg) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-                FacesMessage.SEVERITY_INFO, msg, null));
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    public JurisdicaoFacade getJurisdicaoFacade() {
+        if (jurisdicaoFacade == null) {
+            jurisdicaoFacade = new JurisdicaoFacade();
+        }
+        return jurisdicaoFacade;
+    }
+
+    public FeriadoFacade getFeriadoFacade() {
+        if (feriadoFacade == null) {
+            feriadoFacade = new FeriadoFacade();
+        }
+        return feriadoFacade;
     }
 
     // CIDADE
-    public String save() {
-        cidade.setNome(cidade.getNome().toUpperCase());
-        cidadeService.create(cidade);
-        message("Cidade cadastrada com sucesso!");
-        selectedCidade = cidade;
-
-        cidades = null;
-        return "cidades-details";
+    public String create() {
+        try {
+            cidade.setNome(cidade.getNome().toUpperCase());
+            getCidadeFacade().create(cidade);
+            displayInfoMessageToUser("Cidade cadastrada com sucesso!");
+            loadCidades();
+            resetCidade();
+            return "cidades-list";
+        } catch (Exception e) {
+            displayErrorMessageToUser("Erro ao cadastrar a nova cidade!");
+            return "cidades-new";
+        }
     }
 
     public String newCidade() {
-        cidade = new Cidade();
-
         return "cidades-new";
     }
 
     public List<Cidade> findAll() {
-        cidades = cidadeService.findAll();
-
+        loadCidades();
         return cidades;
     }
 
     public String remove() {
-        cidadeService.delete(this.selectedCidade);
-        message("Cidade excluída com sucesso!");
-
-        cidades = null;
-
+        try {
+            getCidadeFacade().delete(this.selectedCidade);
+            displayInfoMessageToUser("Cidade excluída com sucesso!");
+            loadCidades();
+            resetCidade();
+        } catch (Exception e) {
+            displayErrorMessageToUser("Erro ao excluir cidade!");
+            e.printStackTrace();
+        }
         return "cidades-list";
     }
 
     public void onRowEdit(RowEditEvent event) {
         Cidade cidadeAlterada = (Cidade) event.getObject();
         cidadeAlterada.setNome(cidadeAlterada.getNome().toUpperCase());
-        cidadeService.update(cidadeAlterada);
-        message("Cidade Atualizada.");
+        cidadeFacade.update(cidadeAlterada);
+        displayInfoMessageToUser("Cidade Atualizada.");
     }
 
     public void onCancel(RowEditEvent event) {
-        message("Atualização Cancelada.");
+        displayInfoMessageToUser("Atualização Cancelada.");
     }
 
     // JURISDICAO
     public String saveJurisdicao() {
         jurisdicao.setCidade(selectedCidade);
         jurisdicao.setNome(jurisdicao.getNome().toUpperCase());
-        jurisdicaoService.create(jurisdicao);
+        jurisdicaoFacade.create(jurisdicao);
         selectedCidade.getJurisdicaos().add(jurisdicao);
-        message("Jurisdição cadastrada com sucesso!");
+        displayInfoMessageToUser("Jurisdição cadastrada com sucesso!");
 
         return "cidades-details";
     }
@@ -124,32 +131,32 @@ public class CidadeBean implements Serializable {
 
     public String removeJurisdicao() {
 
-        Jurisdicao jur = jurisdicaoService.findOne(selectedJurisdicao.getIdjurisdicao());
-        jurisdicaoService.delete(jur);
-        
+        Jurisdicao jur = jurisdicaoFacade.find(selectedJurisdicao.getIdjurisdicao());
+        jurisdicaoFacade.delete(jur);
+
         selectedCidade.getJurisdicaos().remove(selectedJurisdicao);
-        message("Jurisdição excluída com sucesso!");
-        
+        displayInfoMessageToUser("Jurisdição excluída com sucesso!");
+
         return "cidades-details";
     }
 
     public void onRowEditJurisdicao(RowEditEvent event) {
         Jurisdicao jurisdicaoAlterada = (Jurisdicao) event.getObject();
         jurisdicaoAlterada.setNome(jurisdicaoAlterada.getNome().toUpperCase());
-        jurisdicaoService.update(jurisdicaoAlterada);
+        jurisdicaoFacade.update(jurisdicaoAlterada);
 
-        FacesMessage msg = new FacesMessage("Jurisdicão Atualizada", null);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-
+        displayInfoMessageToUser("Jurisdicão Atualizada");
     }
 
     public void onCancelJurisdicao(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Atualização Cancelada", null);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        displayInfoMessageToUser("Atualização Cancelada");
     }
 
     //GETTERS AND SETTERS
     public Cidade getCidade() {
+        if (cidade == null) {
+            cidade = new Cidade();
+        }
         return cidade;
     }
 
@@ -245,5 +252,33 @@ public class CidadeBean implements Serializable {
 
     public void setFilteredFeriados(List<Feriado> filteredFeriados) {
         this.filteredFeriados = filteredFeriados;
+    }
+
+    // LOADERS AND RESETERS
+    // cidade
+    private void loadCidades() {
+        cidades = getCidadeFacade().listAll();
+    }
+
+    private void resetCidade() {
+        cidade = new Cidade();
+    }
+
+    // jurisdicao
+    private void loadJurisdicoes() {
+        jurisdicoes = getJurisdicaoFacade().listAll();
+    }
+
+    private void resetJurisdicao() {
+        jurisdicao = new Jurisdicao();
+    }
+
+    // feriado
+    private void loadFeriados() {
+        feriados = getFeriadoFacade().listAll();
+    }
+
+    private void resetFeriado() {
+        feriado = new Feriado();
     }
 }

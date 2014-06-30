@@ -1,88 +1,86 @@
 package creago.dfisc.afg.sifis.planejamento.beans;
 
 import creago.dfisc.afg.sifis.planejamento.entities.Feriado;
-import creago.dfisc.afg.sifis.planejamento.service.IFeriadoService;
-import creago.dfisc.afg.sifis.planejamento.service.impl.FeriadoService;
+import creago.dfisc.afg.sifis.planejamento.facade.FeriadoFacade;
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import org.primefaces.event.RowEditEvent;
 
 /**
  *
  * @author Tiago Borges Pereira
  */
-public class FeriadoBean implements Serializable {
+@SessionScoped
+@ManagedBean
+public class FeriadoBean extends AbstractBean implements Serializable {
 
     private Feriado feriado;
     private List<Feriado> feriados;
     private Feriado selectedFeriado;
     private List<Feriado> filteredFeriados;
-    
-    private IFeriadoService feriadoService;
-    
-    
-//    private final String persistenceUnitName = "Planejamento";
-//    private final SimpleEntityManager simpleEntityManager = new SimpleEntityManager(persistenceUnitName);
-//    private FeriadoService service = new FeriadoServiceImpl(simpleEntityManager);
 
-    @PostConstruct
-    private void init() {
-        feriado = new Feriado();
+    private FeriadoFacade feriadoFacade;
+
+    public FeriadoFacade getFeriadoFacade() {
+        if (feriadoFacade == null) {
+            feriadoFacade = new FeriadoFacade();
+        }
+        return feriadoFacade;
     }
 
-    public String save() {
-        feriadoService.create(feriado);
-        message("Feriado cadastrado com sucesso!");
-
-        feriados.add(feriado);
-        return "feriados-list";
-    }
-
-    private void message(String msg) {
-        FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(msg, ""));
+    public String create() {
+        try {
+            getFeriadoFacade().create(feriado);
+            displayInfoMessageToUser("Feriado cadastrado com sucesso!");
+            loadFeriados();
+            resetFeriado();
+            return "feriados-list";
+        } catch (Exception e) {
+            displayErrorMessageToUser("Erro ao cadastrar o novo feriado!");
+            return "feriados-new";
+        }
     }
 
     public String newFeriado() {
-        feriado = new Feriado();
-
         return "feriados-new";
     }
 
     public List<Feriado> findAll() {
-        feriados = feriadoService.findAll();
-
+        loadFeriados();
         return feriados;
     }
 
     public String remove() {
-        feriadoService.delete(this.selectedFeriado);
-        feriados.remove(this.selectedFeriado);
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-                FacesMessage.SEVERITY_INFO, "Feriado excluído com sucesso!", null));
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-
+        try {
+            getFeriadoFacade().delete(selectedFeriado);
+            displayInfoMessageToUser("Feriado excluído com sucesso!");
+            loadFeriados();
+            resetFeriado();
+        } catch (Exception e) {
+            displayErrorMessageToUser("Erro ao excluir feriado!");
+            e.printStackTrace();
+        }
         return "feriados-list";
     }
 
     public void onRowEdit(RowEditEvent event) {
         Feriado feriadoAlterado = (Feriado) event.getObject();
-        feriadoService.update(feriadoAlterado);
-
-        FacesMessage msg = new FacesMessage("Feriado Atualizado", null);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        getFeriadoFacade().update(feriadoAlterado);
+        displayInfoMessageToUser("Feriado atualizado com sucesso!");
+        loadFeriados();
+        resetFeriado();
     }
 
     public void onCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Atualização Cancelada", null);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        displayInfoMessageToUser("Atualização cancelada com sucesso!");
     }
 
     public Feriado getFeriado() {
+        if (feriado == null) {
+            feriado = new Feriado();
+        }
         return feriado;
     }
 
@@ -116,11 +114,19 @@ public class FeriadoBean implements Serializable {
         this.filteredFeriados = filteredFeriados;
     }
 
-    public IFeriadoService getFeriadoService() {
-        return feriadoService;
+    public FeriadoFacade getFeriadoService() {
+        return feriadoFacade;
     }
 
-    public void setFeriadoService(IFeriadoService feriadoService) {
-        this.feriadoService = feriadoService;
+    public void setFeriadoService(FeriadoFacade feriadoService) {
+        this.feriadoFacade = feriadoService;
+    }
+
+    private void loadFeriados() {
+        feriados = getFeriadoFacade().listAll();
+    }
+
+    private void resetFeriado() {
+        feriado = new Feriado();
     }
 }

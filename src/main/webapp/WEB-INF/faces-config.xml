@@ -23,6 +23,25 @@
         </navigation-case>
     </navigation-rule>
     
+    <!-- ================== INSPETORIA CONFIGURATION ================== -->
+    <!-- Listar inspetorias -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>inspetorias-list</from-outcome>
+            <to-view-id>/inspetorias-list.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Cadastrar nova inspetoria -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>inspetorias-new</from-outcome>
+            <to-view-id>/inspetorias-new.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
     <!-- ====================== CIDADES CONFIGURATION ====================== -->
     <navigation-rule>
         <navigation-case>
@@ -73,6 +92,12 @@
     <managed-bean>
         <managed-bean-name>FeriadoView</managed-bean-name>
         <managed-bean-class>creago.dfisc.afg.sifis.planejamento.beans.FeriadoBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>InspetoriaView</managed-bean-name>
+        <managed-bean-class>creago.dfisc.afg.sifis.planejamento.beans.InspetoriaBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     

@@ -1,7 +1,7 @@
 package creago.dfisc.afg.sifis.planejamento.beans;
 
 import creago.dfisc.afg.sifis.planejamento.entities.Bairro;
-import creago.dfisc.afg.sifis.planejamento.service.IBairroService;
+import creago.dfisc.afg.sifis.planejamento.facade.BairroFacade;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -16,7 +16,7 @@ public class BairroBean {
     private Bairro bairro;
 
     //@Autowired
-    private IBairroService bairroService;
+    private BairroFacade bairroService;
 
     @PostConstruct
     private void init() {
@@ -46,11 +46,11 @@ public class BairroBean {
         this.bairro = bairro;
     }
 
-    public IBairroService getBairroService() {
+    public BairroFacade getBairroService() {
         return bairroService;
     }
 
-    public void setBairroService(IBairroService bairroService) {
+    public void setBairroService(BairroFacade bairroService) {
         this.bairroService = bairroService;
     }
 }
