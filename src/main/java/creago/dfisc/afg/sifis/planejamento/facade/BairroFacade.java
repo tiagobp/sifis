@@ -10,42 +10,28 @@ import java.util.List;
  * @author Tiago Borges Pereira
  */
 public class BairroFacade implements Serializable {
-    
+
     private final BairroDAO dao = new BairroDAO();
-    
+
     public void create(Bairro bairro) {
-        dao.beginTransaction();
-        dao.save(bairro);
-        dao.commitAndCloseTransaction();
+        dao.persist(bairro);
     }
- 
+
     public void update(Bairro bairro) {
-        dao.beginTransaction();
-        Bairro persisted = dao.find(bairro.getIdbairro());
-        persisted.setNome(bairro.getNome());
-        persisted.setJurisdicao(bairro.getJurisdicao());
-        dao.update(persisted);
-        dao.commitAndCloseTransaction();
+        dao.merge(bairro);
     }
- 
+
     public Bairro find(Long entityId) {
-        dao.beginTransaction();
-        Bairro bairro = dao.find(entityId);
-        dao.closeTransaction();
+        Bairro bairro = dao.getById(entityId);
         return bairro;
     }
- 
+
     public List<Bairro> listAll() {
-        dao.beginTransaction();
         List<Bairro> result = dao.findAll();
-        dao.closeTransaction();
         return result;
     }
- 
+
     public void delete(Bairro bairro) {
-        dao.beginTransaction();
-        Bairro persisted = dao.findReferenceOnly(bairro.getIdbairro());
-        dao.delete(persisted);
-        dao.commitAndCloseTransaction();
+        dao.removeById(bairro.getIdbairro());
     }
 }

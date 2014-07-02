@@ -13,30 +13,24 @@ public class CidadeFacade {
     private final CidadeDAO dao = new CidadeDAO();
 
     public void create(Cidade cidade) {
-        dao.beginTransaction();
-        dao.save(cidade);
-        dao.commitAndCloseTransaction();
+        dao.persist(cidade);
     }
 
     public void update(Cidade cidade) {
-        dao.beginTransaction();
-//        Cidade persisted = dao.find(cidade.getIdcidade());
-//        persisted.setNome(cidade.getNome());
-        dao.update(cidade);
-        dao.commitAndCloseTransaction();
+        dao.merge(cidade);
     }
 
-    public void delete(Cidade cidade) {
-        dao.beginTransaction();
-        Cidade persisted = dao.findReferenceOnly(cidade.getIdcidade());
-        dao.delete(persisted);
-        dao.commitAndCloseTransaction();
+    public Cidade find(Long entityId) {
+        Cidade cidade = dao.getById(entityId);
+        return cidade;
     }
 
     public List<Cidade> listAll() {
-        dao.beginTransaction();
         List<Cidade> result = dao.findAll();
-        dao.closeTransaction();
         return result;
+    }
+
+    public void delete(Cidade cidade) {
+        dao.removeById(cidade.getIdcidade());
     }
 }

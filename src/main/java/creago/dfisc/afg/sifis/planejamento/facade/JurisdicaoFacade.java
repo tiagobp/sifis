@@ -1,5 +1,6 @@
 package creago.dfisc.afg.sifis.planejamento.facade;
 
+import creago.dfisc.afg.sifis.planejamento.dao.JurisdicaoDAO;
 import creago.dfisc.afg.sifis.planejamento.entities.Jurisdicao;
 import java.util.List;
 
@@ -7,26 +8,29 @@ import java.util.List;
  *
  * @author Tiago Borges Pereira
  */
-public class JurisdicaoFacade  {
+public class JurisdicaoFacade {
 
-    public void update(Jurisdicao jurisdicaoAlterada) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void delete(Jurisdicao jur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Jurisdicao find(Long idjurisdicao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private final JurisdicaoDAO dao = new JurisdicaoDAO();
 
     public void create(Jurisdicao jurisdicao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.persist(jurisdicao);
+    }
+
+    public void update(Jurisdicao jurisdicao) {
+        dao.merge(jurisdicao);
+    }
+
+    public Jurisdicao find(Long entityId) {
+        Jurisdicao jurisdicao = dao.getById(entityId);
+        return jurisdicao;
     }
 
     public List<Jurisdicao> listAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Jurisdicao> result = dao.findAll();
+        return result;
     }
 
+    public void delete(Jurisdicao jurisdicao) {
+        dao.removeById(jurisdicao.getIdjurisdicao());
+    }
 }

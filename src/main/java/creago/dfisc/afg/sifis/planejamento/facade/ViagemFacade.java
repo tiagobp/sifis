@@ -1,6 +1,8 @@
 package creago.dfisc.afg.sifis.planejamento.facade;
 
+import creago.dfisc.afg.sifis.planejamento.dao.ViagemDAO;
 import creago.dfisc.afg.sifis.planejamento.entities.Viagem;
+import java.util.List;
 
 /**
  *
@@ -8,4 +10,27 @@ import creago.dfisc.afg.sifis.planejamento.entities.Viagem;
  */
 public class ViagemFacade {
 
+    private final ViagemDAO dao = new ViagemDAO();
+
+    public void create(Viagem viagem) {
+        dao.persist(viagem);
+    }
+
+    public void update(Viagem viagem) {
+        dao.merge(viagem);
+    }
+
+    public Viagem find(Long entityId) {
+        Viagem viagem = dao.getById(entityId);
+        return viagem;
+    }
+
+    public List<Viagem> listAll() {
+        List<Viagem> result = dao.findAll();
+        return result;
+    }
+
+    public void delete(Viagem viagem) {
+        dao.removeById(viagem.getIdviagem());
+    }
 }

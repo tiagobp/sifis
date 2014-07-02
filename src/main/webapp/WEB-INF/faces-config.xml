@@ -87,6 +87,24 @@
         </navigation-case>
     </navigation-rule>
     
+    <!-- ================== FISCAL CONFIGURATION ================== -->
+    <!-- Listar fiscais -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>fiscais-list</from-outcome>
+            <to-view-id>/fiscais-list.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Cadastrar novo fiscal -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>fiscais-new</from-outcome>
+            <to-view-id>/fiscais-new.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
     
     <!-- ========================== MANAGED BEANS ========================== -->
     <managed-bean>
