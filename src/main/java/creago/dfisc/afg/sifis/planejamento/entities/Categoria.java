@@ -67,40 +67,6 @@ public class Categoria  implements java.io.Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.idcategoria);
-        hash = 41 * hash + Objects.hashCode(this.nome);
-        hash = 41 * hash + Objects.hashCode(this.cor);
-        hash = 41 * hash + Objects.hashCode(this.viagems);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Categoria other = (Categoria) obj;
-        if (!Objects.equals(this.idcategoria, other.idcategoria)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.cor, other.cor)) {
-            return false;
-        }
-        if (!Objects.equals(this.viagems, other.viagems)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "Categoria{" + "idcategoria=" + idcategoria + ", nome=" + nome
                 + ", cor=" + cor + ", viagems=" + viagems + '}';

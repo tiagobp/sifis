@@ -7,13 +7,15 @@
     <h:body>
         <ui:composition template="common/common-layout.xhtml">
             <ui:define name="content">
-                <h1 class="page-heading"><i class="fa fa-calendar-o icon-sidebar"></i> Cadastro de feriado</h1>
+                <h1 class="page-heading"><i class="fa fa-calendar-o icon-sidebar"></i> Cadastro de feriado <small>para #{cidadeBean.selectedCidade.nome}</small></h1>
                 <!-- End page heading -->
 
                 <!-- Begin breadcrumb -->
                 <ol class="breadcrumb default square rsaquo sm">
                     <li><a href="index.xhtml"><i class="fa fa-home"></i></a></li>
-                    <li><a href="feriados-list.xhtml">Lista de feriados</a></li>
+                    <li><a href="cidades-list.xhtml">Lista de cidades</a></li>
+                    <li><a href="cidades-details.xhtml">Detalhes da cidade</a></li>
+                    <li><a href="cidades-new-feriadomunicipal.xhtml">Adição de feriado</a></li>
                     <li class="active">Cadastro de feriado</li>
                 </ol>
                 <!-- End breadcrumb -->
@@ -33,7 +35,7 @@
                                                style="font-weight: bold"/><br/>
                                 <p:inputText id="nome"
                                              required="true" style="width: 100%"
-                                             value="#{FeriadoView.feriado.nome}"
+                                             value="#{cidadeBean.feriado.nome}"
                                              requiredMessage="Informe o nome do novo feriado"
                                              label="nome" size="50"/>
                                 <p:message for="nome" />
@@ -53,14 +55,14 @@
                                             required="true"
                                             requiredMessage="Informe a data do novo feriado"
                                             pattern="dd/MM/yyyy"
-                                            value="#{FeriadoView.feriado.data}"
+                                            value="#{cidadeBean.feriado.data}"
                                             label="dataFNacional"/>
                                 <p:message for="dataFNacional" />
                             </div>
 
                             <div class="form-group">
                                 <p:selectBooleanCheckbox id="dataFixa"
-                                                         value="#{FeriadoView.feriado.isFixo}"
+                                                         value="#{cidadeBean.feriado.isFixo}"
                                                          label="dataFixa"/>&nbsp;
                                 <h:outputLabel for="dataFixa"
                                                value="Feriado com data fixa"
@@ -72,7 +74,7 @@
                             <p:commandButton id="cadastrar"
                                              styleClass="btn btn-primary btn-rounded-lg"
                                              value="Cadastrar"
-                                             action="#{FeriadoView.create()}"
+                                             action="#{cidadeBean.createFeriado()}"
                                              ajax="false"/>&nbsp;
                             <p:commandButton id="resetar"
                                              value="Limpar"

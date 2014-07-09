@@ -22,8 +22,6 @@ public class FiscalBean extends AbstractBean implements Serializable {
     private Fiscal selectedFiscal;
     private List<Fiscal> filteredFiscais;
 
-    private Inspetoria inspetoria;
-
     private FiscalFacade fiscalFacade;
 
     public FiscalFacade getFiscalFacade() {
@@ -35,7 +33,6 @@ public class FiscalBean extends AbstractBean implements Serializable {
 
     public String create() {
         try {
-            fiscal.setInspetoria(inspetoria);
             getFiscalFacade().create(fiscal);
             displayInfoMessageToUser("Fiscal cadastrado com sucesso!");
             loadFiscais();
@@ -85,6 +82,7 @@ public class FiscalBean extends AbstractBean implements Serializable {
     public Fiscal getFiscal() {
         if (fiscal == null) {
             fiscal = new Fiscal();
+            fiscal.setInspetoria(new Inspetoria());
         }
         return fiscal;
     }
@@ -117,17 +115,6 @@ public class FiscalBean extends AbstractBean implements Serializable {
 
     public void setFilteredFiscais(List<Fiscal> filteredFiscais) {
         this.filteredFiscais = filteredFiscais;
-    }
-
-    public Inspetoria getInspetoria() {
-        if (inspetoria == null) {
-            inspetoria = new Inspetoria();
-        }
-        return inspetoria;
-    }
-
-    public void setInspetoria(Inspetoria inspetoria) {
-        this.inspetoria = inspetoria;
     }
 
     // LOADER AND RESETER

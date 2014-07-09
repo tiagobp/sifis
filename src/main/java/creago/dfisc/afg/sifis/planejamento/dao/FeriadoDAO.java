@@ -34,7 +34,7 @@ public class FeriadoDAO {
 
     @SuppressWarnings("unchecked")
     public List<Feriado> findAll() {
-        return entityManager.createQuery("FROM " + Feriado.class.getName())
+        return entityManager.createQuery("FROM " + Feriado.class.getName() + " f ORDER BY f.data")
                 .getResultList();
     }
 

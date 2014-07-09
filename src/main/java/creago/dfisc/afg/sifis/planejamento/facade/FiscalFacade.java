@@ -2,6 +2,7 @@ package creago.dfisc.afg.sifis.planejamento.facade;
 
 import creago.dfisc.afg.sifis.planejamento.dao.FiscalDAO;
 import creago.dfisc.afg.sifis.planejamento.entities.Fiscal;
+import creago.dfisc.afg.sifis.planejamento.entities.Inspetoria;
 import java.util.List;
 
 /**
@@ -17,6 +18,16 @@ public class FiscalFacade {
     }
 
     public void update(Fiscal fiscal) {
+//        InspetoriaFacade iFacade = new InspetoriaFacade();
+//        Inspetoria i = iFacade.find(fiscal.getInspetoria().getIdinspetoria());
+//        
+//        Fiscal persisted = find(fiscal.getIdfiscal());
+//        persisted.setNome(fiscal.getNome());
+//        persisted.setSobrenome(fiscal.getSobrenome());
+//        persisted.setSigla(fiscal.getSigla());
+//        persisted.setMatricula(fiscal.getMatricula());
+//        persisted.setInspetoria(i);
+//        persisted.setIsAtivo(fiscal.getIsAtivo());
         dao.merge(fiscal);
     }
 

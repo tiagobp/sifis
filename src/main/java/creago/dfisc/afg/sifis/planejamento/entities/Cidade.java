@@ -3,7 +3,6 @@ package creago.dfisc.afg.sifis.planejamento.entities;
 
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -72,44 +71,6 @@ public class Cidade  implements java.io.Serializable {
         if (nome == null) {
             throw new IllegalArgumentException("Nome cannot be null");
         }
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + Objects.hashCode(this.idcidade);
-        hash = 59 * hash + Objects.hashCode(this.inspetoria);
-        hash = 59 * hash + Objects.hashCode(this.nome);
-        hash = 59 * hash + Objects.hashCode(this.jurisdicaos);
-        hash = 59 * hash + Objects.hashCode(this.feriados);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cidade other = (Cidade) obj;
-        if (!Objects.equals(this.idcidade, other.idcidade)) {
-            return false;
-        }
-        if (!Objects.equals(this.inspetoria, other.inspetoria)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.jurisdicaos, other.jurisdicaos)) {
-            return false;
-        }
-        if (!Objects.equals(this.feriados, other.feriados)) {
-            return false;
-        }
-        return true;
     }
 
     @Override

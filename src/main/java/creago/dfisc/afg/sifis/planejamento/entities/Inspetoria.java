@@ -75,44 +75,6 @@ public class Inspetoria  implements java.io.Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 11 * hash + Objects.hashCode(this.idinspetoria);
-        hash = 11 * hash + Objects.hashCode(this.nome);
-        hash = 11 * hash + Objects.hashCode(this.fiscals);
-        hash = 11 * hash + Objects.hashCode(this.rotas);
-        hash = 11 * hash + Objects.hashCode(this.cidades);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Inspetoria other = (Inspetoria) obj;
-        if (!Objects.equals(this.idinspetoria, other.idinspetoria)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.fiscals, other.fiscals)) {
-            return false;
-        }
-        if (!Objects.equals(this.rotas, other.rotas)) {
-            return false;
-        }
-        if (!Objects.equals(this.cidades, other.cidades)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "Inspetoria{" + "idinspetoria=" + idinspetoria + ", nome=" + nome
                 + ", fiscals=" + fiscals + ", rotas=" + rotas + ", cidades="

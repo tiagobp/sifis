@@ -33,7 +33,7 @@ public class FeriasDAO {
 
     @SuppressWarnings("unchecked")
     public List<Ferias> findAll() {
-        return entityManager.createQuery("FROM " + Ferias.class.getName())
+        return entityManager.createQuery("FROM " + Ferias.class.getName() + " fe ORDER BY fe.inicio DESC")
                 .getResultList();
     }
 

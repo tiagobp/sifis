@@ -76,44 +76,6 @@ public class Jurisdicao  implements java.io.Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.idjurisdicao);
-        hash = 29 * hash + Objects.hashCode(this.cidade);
-        hash = 29 * hash + Objects.hashCode(this.nome);
-        hash = 29 * hash + Objects.hashCode(this.rotas);
-        hash = 29 * hash + Objects.hashCode(this.bairros);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Jurisdicao other = (Jurisdicao) obj;
-        if (!Objects.equals(this.idjurisdicao, other.idjurisdicao)) {
-            return false;
-        }
-        if (!Objects.equals(this.cidade, other.cidade)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.rotas, other.rotas)) {
-            return false;
-        }
-        if (!Objects.equals(this.bairros, other.bairros)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "Jurisdicao{" + "idjurisdicao=" + idjurisdicao + ", cidade="
                 + cidade + ", nome=" + nome + ", rotas=" + rotas + ", bairros="

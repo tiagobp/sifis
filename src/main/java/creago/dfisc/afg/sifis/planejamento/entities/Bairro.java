@@ -50,36 +50,6 @@ public class Bairro  implements java.io.Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.idbairro);
-        hash = 41 * hash + Objects.hashCode(this.jurisdicao);
-        hash = 41 * hash + Objects.hashCode(this.nome);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Bairro other = (Bairro) obj;
-        if (!Objects.equals(this.idbairro, other.idbairro)) {
-            return false;
-        }
-        if (!Objects.equals(this.jurisdicao, other.jurisdicao)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "Bairro{" + "idbairro=" + idbairro + ", jurisdicao=" + jurisdicao + ", nome=" + nome + '}';
     }

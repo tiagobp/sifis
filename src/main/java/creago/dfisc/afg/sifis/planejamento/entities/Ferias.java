@@ -62,40 +62,6 @@ public class Ferias  implements java.io.Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 43 * hash + Objects.hashCode(this.idferias);
-        hash = 43 * hash + Objects.hashCode(this.fiscal);
-        hash = 43 * hash + Objects.hashCode(this.inicio);
-        hash = 43 * hash + Objects.hashCode(this.fim);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Ferias other = (Ferias) obj;
-        if (!Objects.equals(this.idferias, other.idferias)) {
-            return false;
-        }
-        if (!Objects.equals(this.fiscal, other.fiscal)) {
-            return false;
-        }
-        if (!Objects.equals(this.inicio, other.inicio)) {
-            return false;
-        }
-        if (!Objects.equals(this.fim, other.fim)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "Ferias{" + "idferias=" + idferias + ", fiscal=" + fiscal
                 + ", inicio=" + inicio + ", fim=" + fim + '}';

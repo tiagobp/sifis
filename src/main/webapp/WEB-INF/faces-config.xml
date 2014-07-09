@@ -33,6 +33,15 @@
         </navigation-case>
     </navigation-rule>
     
+    <!-- Detalhar inspetoria -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>inspetorias-details</from-outcome>
+            <to-view-id>/inspetorias-details.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
     <!-- Cadastrar nova inspetoria -->
     <navigation-rule>
         <navigation-case>
@@ -78,11 +87,20 @@
         </navigation-case>
     </navigation-rule>
     
-    <!-- Cadastrar novo feriado municipal -->
+    <!-- Selecionar feriado municipal -->
     <navigation-rule>
         <navigation-case>
             <from-outcome>cidades-new-feriadomunicipal</from-outcome>
             <to-view-id>/cidades-new-feriadomunicipal.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Cadastrar novo feriado municipal -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>cidades-new-feriadomunicipal-new</from-outcome>
+            <to-view-id>/cidades-new-feriadomunicipal-new.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

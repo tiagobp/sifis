@@ -84,48 +84,6 @@ public class Viagem implements java.io.Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + Objects.hashCode(this.idviagem);
-        hash = 59 * hash + Objects.hashCode(this.fiscal);
-        hash = 59 * hash + Objects.hashCode(this.rota);
-        hash = 59 * hash + Objects.hashCode(this.categoria);
-        hash = 59 * hash + Objects.hashCode(this.inicio);
-        hash = 59 * hash + Objects.hashCode(this.fim);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Viagem other = (Viagem) obj;
-        if (!Objects.equals(this.idviagem, other.idviagem)) {
-            return false;
-        }
-        if (!Objects.equals(this.fiscal, other.fiscal)) {
-            return false;
-        }
-        if (!Objects.equals(this.rota, other.rota)) {
-            return false;
-        }
-        if (!Objects.equals(this.categoria, other.categoria)) {
-            return false;
-        }
-        if (!Objects.equals(this.inicio, other.inicio)) {
-            return false;
-        }
-        if (!Objects.equals(this.fim, other.fim)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "Viagem{" + "idviagem=" + idviagem + ", fiscal=" + fiscal + ","
                 + " rota=" + rota + ", categoria=" + categoria + ", inicio="

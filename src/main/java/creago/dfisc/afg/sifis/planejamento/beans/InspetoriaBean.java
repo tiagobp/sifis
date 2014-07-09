@@ -1,18 +1,21 @@
 package creago.dfisc.afg.sifis.planejamento.beans;
 
+import creago.dfisc.afg.sifis.planejamento.entities.Cidade;
+import creago.dfisc.afg.sifis.planejamento.entities.Fiscal;
 import creago.dfisc.afg.sifis.planejamento.entities.Inspetoria;
+import creago.dfisc.afg.sifis.planejamento.entities.Rota;
 import creago.dfisc.afg.sifis.planejamento.facade.InspetoriaFacade;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import org.primefaces.event.RowEditEvent;
 
 /**
  *
  * @author Tiago Borges Pereira
  */
-@ViewScoped
+@SessionScoped
 @ManagedBean
 public class InspetoriaBean extends AbstractBean implements Serializable {
 
@@ -20,6 +23,10 @@ public class InspetoriaBean extends AbstractBean implements Serializable {
     private List<Inspetoria> inspetorias;
     private Inspetoria selectedInspetoria;
     private List<Inspetoria> filteredInspetorias;
+    
+    private List<Cidade> filteredCidades;
+    private List<Fiscal> filteredFiscais;
+    private List<Rota> filteredRotas;
 
     private InspetoriaFacade inspetoriaFacade;
 
@@ -68,6 +75,7 @@ public class InspetoriaBean extends AbstractBean implements Serializable {
 
     public void onRowEdit(RowEditEvent event) {
         Inspetoria inspetoriaAlterada = (Inspetoria) event.getObject();
+        inspetoriaAlterada.setNome(inspetoriaAlterada.getNome().toUpperCase());
         getInspetoriaFacade().update(inspetoriaAlterada);
         displayInfoMessageToUser("Inspetoria atualizada com sucesso!");
         loadInspetoria();
@@ -116,7 +124,35 @@ public class InspetoriaBean extends AbstractBean implements Serializable {
         this.filteredInspetorias = filteredInspetorias;
     }
 
+    public List<Cidade> getFilteredCidades() {
+        return filteredCidades;
+    }
+
+    public void setFilteredCidades(List<Cidade> filteredCidades) {
+        this.filteredCidades = filteredCidades;
+    }
+
+    public List<Fiscal> getFilteredFiscais() {
+        return filteredFiscais;
+    }
+
+    public void setFilteredFiscais(List<Fiscal> filteredFiscais) {
+        this.filteredFiscais = filteredFiscais;
+    }
+
+    public List<Rota> getFilteredRotas() {
+        return filteredRotas;
+    }
+
+    public void setFilteredRotas(List<Rota> filteredRotas) {
+        this.filteredRotas = filteredRotas;
+    }
+
     private void loadInspetoria() {
+        filteredInspetorias = null;
+        filteredCidades = null;
+        filteredFiscais = null;
+        filteredRotas = null;
         inspetorias = getInspetoriaFacade().listAll();
     }
 

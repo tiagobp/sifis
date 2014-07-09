@@ -34,7 +34,7 @@ public class CidadeDAO {
 
     @SuppressWarnings("unchecked")
     public List<Cidade> findAll() {
-        return entityManager.createQuery("FROM " + Cidade.class.getName())
+        return entityManager.createQuery("FROM " + Cidade.class.getName() + " c ORDER BY c.nome")
                 .getResultList();
     }
 
@@ -42,6 +42,7 @@ public class CidadeDAO {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(cidade);
+            entityManager.refresh(cidade);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -56,6 +57,7 @@ public class CidadeDAO {
             persisted.setNome(cidade.getNome());
             persisted.setInspetoria(cidade.getInspetoria());
             entityManager.merge(persisted);
+            entityManager.refresh(cidade);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();

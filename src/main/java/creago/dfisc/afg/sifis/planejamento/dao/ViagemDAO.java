@@ -33,7 +33,7 @@ public class ViagemDAO {
 
     @SuppressWarnings("unchecked")
     public List<Viagem> findAll() {
-        return entityManager.createQuery("FROM " + Viagem.class.getName())
+        return entityManager.createQuery("FROM " + Viagem.class.getName() + " v ORDER BY v.inicio")
                 .getResultList();
     }
 

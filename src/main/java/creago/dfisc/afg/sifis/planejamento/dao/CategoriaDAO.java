@@ -33,7 +33,7 @@ public class CategoriaDAO {
 
     @SuppressWarnings("unchecked")
     public List<Categoria> findAll() {
-        return entityManager.createQuery("FROM " + Categoria.class.getName())
+        return entityManager.createQuery("FROM " + Categoria.class.getName() + " cat ORDER BY cat.nome")
                 .getResultList();
     }
 

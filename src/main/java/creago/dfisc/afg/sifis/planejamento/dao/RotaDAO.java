@@ -33,7 +33,7 @@ public class RotaDAO {
 
     @SuppressWarnings("unchecked")
     public List<Rota> findAll() {
-        return entityManager.createQuery("FROM " + Rota.class.getName())
+        return entityManager.createQuery("FROM " + Rota.class.getName() + " r ORDER BY r.nome")
                 .getResultList();
     }
 

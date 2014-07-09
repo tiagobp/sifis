@@ -127,64 +127,6 @@ public class Usuario  implements java.io.Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.idusuario);
-        hash = 23 * hash + Objects.hashCode(this.fiscal);
-        hash = 23 * hash + Objects.hashCode(this.username);
-        hash = 23 * hash + Objects.hashCode(this.password);
-        hash = 23 * hash + Objects.hashCode(this.authority);
-        hash = 23 * hash + Objects.hashCode(this.nome);
-        hash = 23 * hash + Objects.hashCode(this.sobrenome);
-        hash = 23 * hash + Objects.hashCode(this.matricula);
-        hash = 23 * hash + Objects.hashCode(this.email);
-        hash = 23 * hash + Objects.hashCode(this.avatar);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.idusuario, other.idusuario)) {
-            return false;
-        }
-        if (!Objects.equals(this.fiscal, other.fiscal)) {
-            return false;
-        }
-        if (!Objects.equals(this.username, other.username)) {
-            return false;
-        }
-        if (!Objects.equals(this.password, other.password)) {
-            return false;
-        }
-        if (!Objects.equals(this.authority, other.authority)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.sobrenome, other.sobrenome)) {
-            return false;
-        }
-        if (!Objects.equals(this.matricula, other.matricula)) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.avatar, other.avatar)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "Usuario{" + "idusuario=" + idusuario + ", fiscal=" + fiscal
                 + ", username=" + username + ", password=" + password

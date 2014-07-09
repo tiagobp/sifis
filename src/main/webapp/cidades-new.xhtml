@@ -8,39 +8,59 @@
     <h:body>
         <ui:composition template="common/common-layout.xhtml">
             <ui:define name="content">
-                <h1 class="page-heading">Cidades <small>Cadastrar nova cidade</small></h1>
+                <h1 class="page-heading"><i class="fa fa-building-o icon-sidebar"></i> Cadastro de cidade</h1>
                 <!-- End page heading -->
 
                 <!-- Begin breadcrumb -->
                 <ol class="breadcrumb default square rsaquo sm">
                     <li><a href="index.xhtml"><i class="fa fa-home"></i></a></li>
                     <li><a href="cidades-list.xhtml">Lista de cidades</a></li>
-                    <li class="active">Cadastrar nova cidade</li>
+                    <li class="active">Cadastro de cidade</li>
                 </ol>
                 <!-- End breadcrumb -->
 
-                <div class="panel panel-success">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4 class="panel-title">Cadastrar nova cidade</h4>
+                        <i class="fa fa-building-o icon-sidebar"></i>
+                        CADASTRO DE CIDADE
+                        <br/>
                     </div>
                     <h:form id="cidade">
-                        <div class="the-box">
+                        <div class="the-box" style="border: none">
+                            <div class="form-group">
+                                <h:outputLabel for="inspetoria"
+                                               value="INSPETORIA:"
+                                               style="font-weight: bold"/><br/>
+                                <h:selectOneMenu  id="inspetoria"
+                                                  required="true"
+                                                  styleClass="form-control"
+                                                  value="#{cidadeBean.cidade.inspetoria.idinspetoria}"
+                                                  requiredMessage="Selecione a inspetoria resposável pela nova cidade"
+                                                  label="inspetoria">
+                                    <f:selectItem itemLabel="Selecione" itemValue="" />
+                                    <f:selectItems value="#{inspetoriaBean.inspetorias}"
+                                                   var="inspetoria"
+                                                   itemLabel="#{inspetoria.nome}"
+                                                   itemValue="#{inspetoria.idinspetoria}"/>
+                                </h:selectOneMenu>
+                                <p:message for="inspetoria" />
+                            </div>
                             <div class="form-group">
                                 <!-- Nome do Feriado -->
                                 <h:outputLabel for="nome"
-                                               value="Nome da Cidade *:"
+                                               value="NOME DA CIDADE:"
                                                style="font-weight: bold"/><br/>
                                 <p:inputText id="nome"
                                              required="true" style="width: 100%"
-                                             value="#{CidadeView.cidade.nome}"
+                                             value="#{cidadeBean.cidade.nome}"
                                              requiredMessage="Informe o nome da nova cidade"
                                              label="nome"/>
                                 <p:message for="nome" />
                             </div>
                             <p:commandButton id="cadastrar"
-                                             styleClass="btn btn-success btn-rounded-lg"
+                                             styleClass="btn btn-primary btn-rounded-lg"
                                              value="Cadastrar"
-                                             action="#{CidadeView.create()}"
+                                             action="#{cidadeBean.create()}"
                                              ajax="false"/>&nbsp;
                             <p:commandButton id="resetar"
                                              value="Limpar"

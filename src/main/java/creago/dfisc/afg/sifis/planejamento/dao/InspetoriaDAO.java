@@ -34,7 +34,7 @@ public class InspetoriaDAO {
 
     @SuppressWarnings("unchecked")
     public List<Inspetoria> findAll() {
-        return entityManager.createQuery("FROM " + Inspetoria.class.getName())
+        return entityManager.createQuery("FROM " + Inspetoria.class.getName() + " i ORDER BY i.nome")
                 .getResultList();
     }
 
@@ -43,6 +43,7 @@ public class InspetoriaDAO {
             entityManager.getTransaction().begin();
             entityManager.persist(inspetoria);
             entityManager.getTransaction().commit();
+            entityManager.refresh(inspetoria);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -56,6 +57,7 @@ public class InspetoriaDAO {
             persisted.setNome(inspetoria.getNome());
             entityManager.merge(persisted);
             entityManager.getTransaction().commit();
+            entityManager.refresh(inspetoria);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();

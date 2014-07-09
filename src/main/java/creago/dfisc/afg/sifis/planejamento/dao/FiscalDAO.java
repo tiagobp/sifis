@@ -33,7 +33,7 @@ public class FiscalDAO {
 
     @SuppressWarnings("unchecked")
     public List<Fiscal> findAll() {
-        return entityManager.createQuery("FROM " + Fiscal.class.getName())
+        return entityManager.createQuery("FROM " + Fiscal.class.getName() + " fis ORDER BY fis.nome, fis.sobrenome")
                 .getResultList();
     }
 
@@ -51,14 +51,7 @@ public class FiscalDAO {
     public void merge(Fiscal fiscal) {
         try {
             entityManager.getTransaction().begin();
-            Fiscal persisted = getById(fiscal.getIdfiscal());
-            persisted.setNome(fiscal.getNome());
-            persisted.setSobrenome(fiscal.getSobrenome());
-            persisted.setSigla(fiscal.getSigla());
-            persisted.setMatricula(fiscal.getMatricula());
-            persisted.setInspetoria(fiscal.getInspetoria());
-            persisted.setIsAtivo(fiscal.getIsAtivo());
-            entityManager.merge(persisted);
+            entityManager.merge(fiscal);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();

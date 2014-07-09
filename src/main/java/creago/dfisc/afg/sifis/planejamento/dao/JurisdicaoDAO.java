@@ -33,7 +33,7 @@ public class JurisdicaoDAO {
 
     @SuppressWarnings("unchecked")
     public List<Jurisdicao> findAll() {
-        return entityManager.createQuery("FROM " + Jurisdicao.class.getName())
+        return entityManager.createQuery("FROM " + Jurisdicao.class.getName() + " j ORDER BY j.nome")
                 .getResultList();
     }
 
@@ -41,6 +41,7 @@ public class JurisdicaoDAO {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(jurisdicao);
+            entityManager.refresh(jurisdicao);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();

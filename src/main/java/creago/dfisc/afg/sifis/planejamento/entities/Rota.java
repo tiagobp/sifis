@@ -127,60 +127,6 @@ public class Rota implements java.io.Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.idrota);
-        hash = 37 * hash + Objects.hashCode(this.inspetoria);
-        hash = 37 * hash + Objects.hashCode(this.nome);
-        hash = 37 * hash + Objects.hashCode(this.quilometragem);
-        hash = 37 * hash + Objects.hashCode(this.diaria);
-        hash = 37 * hash + Objects.hashCode(this.almoco);
-        hash = 37 * hash + Objects.hashCode(this.criterioRevisita);
-        hash = 37 * hash + Objects.hashCode(this.viagems);
-        hash = 37 * hash + Objects.hashCode(this.jurisdicaos);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Rota other = (Rota) obj;
-        if (!Objects.equals(this.idrota, other.idrota)) {
-            return false;
-        }
-        if (!Objects.equals(this.inspetoria, other.inspetoria)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.quilometragem, other.quilometragem)) {
-            return false;
-        }
-        if (!Objects.equals(this.diaria, other.diaria)) {
-            return false;
-        }
-        if (!Objects.equals(this.almoco, other.almoco)) {
-            return false;
-        }
-        if (!Objects.equals(this.criterioRevisita, other.criterioRevisita)) {
-            return false;
-        }
-        if (!Objects.equals(this.viagems, other.viagems)) {
-            return false;
-        }
-        if (!Objects.equals(this.jurisdicaos, other.jurisdicaos)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "Rota{" + "idrota=" + idrota + ", inspetoria=" + inspetoria
                 + ", nome=" + nome + ", quilometragem=" + quilometragem

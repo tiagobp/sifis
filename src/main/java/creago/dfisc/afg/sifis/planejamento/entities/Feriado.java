@@ -4,7 +4,6 @@ package creago.dfisc.afg.sifis.planejamento.entities;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -75,44 +74,6 @@ public class Feriado  implements java.io.Serializable {
         if(nome == null || data == null || isFixo == null){
             throw new IllegalArgumentException("Nome, Data and IsFixo cannot be null");
         }
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + Objects.hashCode(this.idferiado);
-        hash = 13 * hash + Objects.hashCode(this.nome);
-        hash = 13 * hash + Objects.hashCode(this.data);
-        hash = 13 * hash + Objects.hashCode(this.isFixo);
-        hash = 13 * hash + Objects.hashCode(this.cidades);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Feriado other = (Feriado) obj;
-        if (!Objects.equals(this.idferiado, other.idferiado)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.data, other.data)) {
-            return false;
-        }
-        if (!Objects.equals(this.isFixo, other.isFixo)) {
-            return false;
-        }
-        if (!Objects.equals(this.cidades, other.cidades)) {
-            return false;
-        }
-        return true;
     }
 
     @Override

@@ -33,7 +33,7 @@ public class BairroDAO {
 
     @SuppressWarnings("unchecked")
     public List<Bairro> findAll() {
-        return entityManager.createQuery("FROM " + Bairro.class.getName())
+        return entityManager.createQuery("FROM " + Bairro.class.getName() + " b ORDER BY b.nome")
                 .getResultList();
     }
 

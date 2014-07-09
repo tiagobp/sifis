@@ -2,6 +2,7 @@ package creago.dfisc.afg.sifis.planejamento.beans;
 
 import creago.dfisc.afg.sifis.planejamento.entities.Cidade;
 import creago.dfisc.afg.sifis.planejamento.entities.Feriado;
+import creago.dfisc.afg.sifis.planejamento.entities.Inspetoria;
 import creago.dfisc.afg.sifis.planejamento.entities.Jurisdicao;
 import creago.dfisc.afg.sifis.planejamento.facade.CidadeFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.FeriadoFacade;
@@ -15,7 +16,7 @@ import javax.faces.bean.*;
  *
  * @author Tiago Borges Pereira
  */
-@ViewScoped
+@SessionScoped
 @ManagedBean
 public class CidadeBean extends AbstractBean implements Serializable {
 
@@ -113,37 +114,51 @@ public class CidadeBean extends AbstractBean implements Serializable {
     }
 
     // JURISDICAO
-    public String saveJurisdicao() {
-        jurisdicao.setCidade(selectedCidade);
-        jurisdicao.setNome(jurisdicao.getNome().toUpperCase());
-        jurisdicaoFacade.create(jurisdicao);
-        selectedCidade.getJurisdicaos().add(jurisdicao);
-        displayInfoMessageToUser("Jurisdição cadastrada com sucesso!");
+    public String createJurisdicao() {
+        try {
+            jurisdicao.setCidade(getCidadeFacade().find(selectedCidade.getIdcidade()));
+            jurisdicao.setNome(jurisdicao.getNome().toUpperCase());
+            getJurisdicaoFacade().create(jurisdicao);
 
-        return "cidades-details";
+            selectedCidade.getJurisdicaos().add(jurisdicao);
+
+            displayInfoMessageToUser("Jurisdição cadastrada com sucesso!");
+
+            resetJurisdicao();
+
+            return "cidades-details";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            displayErrorMessageToUser("Erro ao cadastrar a nova jurisdição!");
+            return "cidades-details";
+        }
     }
 
     public String newJurisdicao() {
-        jurisdicao = new Jurisdicao();
-
         return "cidades-new-jurisdicao";
     }
 
     public String removeJurisdicao() {
+        try {
+            Jurisdicao jur = getJurisdicaoFacade().find(selectedJurisdicao.getIdjurisdicao());
+            getJurisdicaoFacade().delete(jur);
 
-        Jurisdicao jur = jurisdicaoFacade.find(selectedJurisdicao.getIdjurisdicao());
-        jurisdicaoFacade.delete(jur);
+            selectedCidade.getJurisdicaos().remove(selectedJurisdicao);
+            displayInfoMessageToUser("Jurisdição excluída com sucesso!");
 
-        selectedCidade.getJurisdicaos().remove(selectedJurisdicao);
-        displayInfoMessageToUser("Jurisdição excluída com sucesso!");
-
-        return "cidades-details";
+            return "cidades-details";
+        } catch (Exception e) {
+            displayErrorMessageToUser("Erro ao excluir feriado!");
+            e.printStackTrace();
+            return "cidades-details";
+        }
     }
 
     public void onRowEditJurisdicao(RowEditEvent event) {
         Jurisdicao jurisdicaoAlterada = (Jurisdicao) event.getObject();
         jurisdicaoAlterada.setNome(jurisdicaoAlterada.getNome().toUpperCase());
-        jurisdicaoFacade.update(jurisdicaoAlterada);
+        getJurisdicaoFacade().update(jurisdicaoAlterada);
 
         displayInfoMessageToUser("Jurisdicão Atualizada");
     }
@@ -152,10 +167,59 @@ public class CidadeBean extends AbstractBean implements Serializable {
         displayInfoMessageToUser("Atualização Cancelada");
     }
 
+    // FERIADO
+    public String createFeriado() {
+        try {
+            feriado.getCidades().add(getCidadeFacade().find(selectedCidade.getIdcidade()));
+            feriado.setNome(feriado.getNome().toUpperCase());
+            getFeriadoFacade().create(feriado);
+
+            selectedCidade.getFeriados().add(feriado);
+
+            displayInfoMessageToUser("Feriado municipal cadastrado com sucesso!");
+
+            resetFeriado();
+
+            return "cidades-details";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            displayErrorMessageToUser("Erro ao cadastrar o novo feriado municipal!");
+            return "cidades-details";
+        }
+    }
+
+    public String linkFeriado() {
+        try {
+            Cidade c = getCidadeFacade().find(selectedCidade.getIdcidade());
+            Feriado f = getFeriadoFacade().find(feriado.getIdferiado());
+            f.getCidades().add(c);
+            getFeriadoFacade().update(f);
+
+            selectedCidade.getFeriados().add(f);
+
+            displayInfoMessageToUser("Feriado municipal adicionado com sucesso!");
+
+            resetFeriado();
+
+            return "cidades-details";
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            displayErrorMessageToUser("Erro ao adicionar feriado municipal!");
+            return "cidades-details";
+        }
+    }
+
+    public String newFeriado() {
+        return "cidades-new-feriadomunicipal";
+    }
+
     //GETTERS AND SETTERS
     public Cidade getCidade() {
         if (cidade == null) {
             cidade = new Cidade();
+            cidade.setInspetoria(new Inspetoria());
         }
         return cidade;
     }
@@ -191,6 +255,9 @@ public class CidadeBean extends AbstractBean implements Serializable {
     }
 
     public Jurisdicao getJurisdicao() {
+        if (jurisdicao == null) {
+            jurisdicao = new Jurisdicao();
+        }
         return jurisdicao;
     }
 
@@ -223,6 +290,9 @@ public class CidadeBean extends AbstractBean implements Serializable {
     }
 
     public Feriado getFeriado() {
+        if (feriado == null) {
+            feriado = new Feriado();
+        }
         return feriado;
     }
 
@@ -257,11 +327,15 @@ public class CidadeBean extends AbstractBean implements Serializable {
     // LOADERS AND RESETERS
     // cidade
     private void loadCidades() {
+        filteredCidades = null;
+        filteredJurisdicoes = null;
+        filteredFeriados = null;
         cidades = getCidadeFacade().listAll();
     }
 
     private void resetCidade() {
         cidade = new Cidade();
+        cidade.setInspetoria(new Inspetoria());
     }
 
     // jurisdicao

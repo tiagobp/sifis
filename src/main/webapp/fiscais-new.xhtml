@@ -9,26 +9,28 @@
     <h:body>
         <ui:composition template="common/common-layout.xhtml">
             <ui:define name="content">
-                <h1 class="page-heading">Fiscais <small>Cadastrar novo fiscal</small></h1>
+                <h1 class="page-heading"><i class="fa fa-users icon-sidebar"></i> Cadastro de fiscal</h1>
                 <!-- End page heading -->
 
                 <!-- Begin breadcrumb -->
                 <ol class="breadcrumb default square rsaquo sm">
                     <li><a href="index.xhtml"><i class="fa fa-home"></i></a></li>
-                    <li class="active">Cadastrar novo fiscal</li>
+                    <li class="active">Cadastro de fiscal</li>
                 </ol>
                 <!-- End breadcrumb -->
 
-                <div class="panel panel-info">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4 class="panel-title">Cadastrar novo fiscal</h4>
+                        <i class="fa fa-users icon-sidebar"></i>
+                        CADASTRO DE FISCAL
+                        <br/>
                     </div>
                     <h:form id="novoFiscalForm">
-                        <div class="the-box">
+                        <div class="the-box" style="border: none">
                             <div class="form-group">
                                 <!-- Nome do Fiscal -->
                                 <h:outputLabel for="nome"
-                                               value="Nome:"
+                                               value="NOME:"
                                                style="font-weight: bold"/>
                                 <p:inputText id="nome"
                                              required="true" style="width: 100%"
@@ -41,7 +43,7 @@
                             <div class="form-group">
                                 <!-- Sobrenome do Fiscal -->
                                 <h:outputLabel for="sobrenome"
-                                               value="Sobrenome:"
+                                               value="SOBRENOME:"
                                                style="font-weight: bold"/>
                                 <p:inputText id="sobrenome"
                                              required="true" style="width: 100%"
@@ -54,7 +56,7 @@
                             <div class="form-group">
                                 <!-- Sigla do Fiscal -->
                                 <h:outputLabel for="sigla"
-                                               value="Sigla:"
+                                               value="SIGLA:"
                                                style="font-weight: bold"/>
                                 <p:inputText id="sigla"
                                              required="true" style="width: 100%"
@@ -68,7 +70,7 @@
                             <div class="form-group">
                                 <!-- Matricula do Fiscal -->
                                 <h:outputLabel for="matricula"
-                                               value="Matrícula:"
+                                               value="MATRÍCULA:"
                                                style="font-weight: bold"/>
                                 <p:inputText id="matricula"
                                              required="true" style="width: 100%"
@@ -84,12 +86,12 @@
                             <div class="form-group">
                                 <!-- Matricula do Fiscal -->
                                 <h:outputLabel for="lotacao"
-                                               value="Lotação:"
+                                               value="LOTAÇÃO:"
                                                style="font-weight: bold"/><br/>
                                 <h:selectOneMenu  id="lotacao"
                                                   required="true"
                                                   styleClass="form-control"
-                                                  value="#{fiscalBean.inspetoria.idinspetoria}"
+                                                  value="#{fiscalBean.fiscal.inspetoria.idinspetoria}"
                                                   requiredMessage="Informe a lotação do novo fiscal"
                                                   label="lotacao">
                                     <f:selectItem itemLabel="Selecione" itemValue="" />
@@ -114,7 +116,7 @@
                             <p:commandButton id="cadastrar"
                                              value="Cadastrar"
                                              action="#{fiscalBean.create()}"
-                                             styleClass="btn btn-info btn-rounded-lg"
+                                             styleClass="btn btn-primary btn-rounded-lg"
                                              ajax="false"/>&nbsp;
                             <p:commandButton id="resetar"
                                              value="Limpar"

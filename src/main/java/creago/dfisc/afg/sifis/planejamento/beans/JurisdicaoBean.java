@@ -2,13 +2,13 @@ package creago.dfisc.afg.sifis.planejamento.beans;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author Tiago Borges Pereira
  */
-@ViewScoped
+@SessionScoped
 @ManagedBean
 public class JurisdicaoBean extends AbstractBean implements Serializable {
 

@@ -137,64 +137,6 @@ public class Fiscal implements java.io.Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.idfiscal);
-        hash = 29 * hash + Objects.hashCode(this.inspetoria);
-        hash = 29 * hash + Objects.hashCode(this.nome);
-        hash = 29 * hash + Objects.hashCode(this.sobrenome);
-        hash = 29 * hash + Objects.hashCode(this.sigla);
-        hash = 29 * hash + Objects.hashCode(this.matricula);
-        hash = 29 * hash + Objects.hashCode(this.isAtivo);
-        hash = 29 * hash + Objects.hashCode(this.usuarios);
-        hash = 29 * hash + Objects.hashCode(this.feriases);
-        hash = 29 * hash + Objects.hashCode(this.viagems);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Fiscal other = (Fiscal) obj;
-        if (!Objects.equals(this.idfiscal, other.idfiscal)) {
-            return false;
-        }
-        if (!Objects.equals(this.inspetoria, other.inspetoria)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.sobrenome, other.sobrenome)) {
-            return false;
-        }
-        if (!Objects.equals(this.sigla, other.sigla)) {
-            return false;
-        }
-        if (!Objects.equals(this.matricula, other.matricula)) {
-            return false;
-        }
-        if (!Objects.equals(this.isAtivo, other.isAtivo)) {
-            return false;
-        }
-        if (!Objects.equals(this.usuarios, other.usuarios)) {
-            return false;
-        }
-        if (!Objects.equals(this.feriases, other.feriases)) {
-            return false;
-        }
-        if (!Objects.equals(this.viagems, other.viagems)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "Fiscal{" + "idfiscal=" + idfiscal + ", inspetoria=" + inspetoria
                 + ", nome=" + nome + ", sobrenome=" + sobrenome + ", sigla="

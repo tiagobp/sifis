@@ -8,7 +8,7 @@
     <h:body>
         <ui:composition template="common/common-layout.xhtml">
             <ui:define name="content">
-                <h1 class="page-heading">#{CidadeView.selectedCidade.nome} <small>Adicionar jurisdição</small></h1>
+                <h1 class="page-heading"><i class="fa fa-map-marker icon-sidebar"></i> Cadastro de jurisdição<small> para #{cidadeBean.selectedCidade.nome}</small></h1>
                 <!-- End page heading -->
 
                 <!-- Begin breadcrumb -->
@@ -16,23 +16,25 @@
                     <li><a href="index.xhtml"><i class="fa fa-home"></i></a></li>
                     <li><a href="cidades-list.xhtml">Lista de cidades</a></li>
                     <li><a href="cidades-details.xhtml">Detalhes da cidade</a></li>
-                    <li class="active">Nova jurisdição</li>
+                    <li class="active">Cadastro de jurisdição</li>
                 </ol>
                 <!-- End breadcrumb -->
 
-                <div class="panel panel-success">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4 class="panel-title">Adicionar jurisdição</h4>
+                        <i class="fa fa-map-marker icon-sidebar"></i>
+                        CADASTRO DE JURISDIÇÃO
+                        <br/>
                     </div>
                     <h:form id="setorForm">
-                        <div class="the-box">
+                        <div class="the-box" style="border: none">
                             <div class="form-group">
                                 <h:outputLabel for="nome"
-                                               value="Jurisdição:"
+                                               value="JURISDIÇÃO:"
                                                style="font-weight: bold"/><br/>
                                 <p:inputText id="nome"
                                              required="true" style="width: 100%"
-                                             value="#{CidadeView.jurisdicao.nome}"
+                                             value="#{cidadeBean.jurisdicao.nome}"
                                              requiredMessage="Informe a nova jurisdição"
                                              label="nome"/>
                                 <p:message for="nome" />
@@ -40,8 +42,8 @@
 
                             <p:commandButton id="cadastrar"
                                              value="Cadastrar"
-                                             styleClass="btn btn-success btn-rounded-lg"
-                                             action="#{CidadeView.saveJurisdicao()}"
+                                             styleClass="btn btn-primary btn-rounded-lg"
+                                             action="#{cidadeBean.createJurisdicao()}"
                                              ajax="false"/>&nbsp;
                             <p:commandButton id="resetar"
                                              styleClass="btn btn-danger btn-rounded-lg"

@@ -9,26 +9,28 @@
     <h:body>
         <ui:composition template="common/common-layout.xhtml">
             <ui:define name="content">
-                <h1 class="page-heading">Inspetorias <small>Cadastrar nova inspetoria</small></h1>
+                <h1 class="page-heading"><i class="fa fa-university icon-sidebar"></i>  Cadastro de inspetoria</h1>
                 <!-- End page heading -->
 
                 <!-- Begin breadcrumb -->
                 <ol class="breadcrumb default square rsaquo sm">
                     <li><a href="index.xhtml"><i class="fa fa-home"></i></a></li>
                     <li><a href="inspetorias-list.xhtml">Lista de inspetorias</a></li>
-                    <li class="active">Cadastrar nova inspetoria</li>
+                    <li class="active">Cadastro de inspetoria</li>
                 </ol>
                 <!-- End breadcrumb -->
 
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4 class="panel-title">Cadastrar nova inspetoria</h4>
+                        <i class="fa fa-university icon-sidebar"> </i>
+                        CADASTRO DE INSPETORIA
+                        <br/>
                     </div>
                     <h:form id="inspetoriaForm">
                         <div class="the-box" style="border: none">
                             <div class="form-group">
                                 <h:outputLabel for="nome"
-                                               value="NOME:"
+                                               value="NOME DA INSPETORIA:"
                                                style="font-weight: bold"/>
                                 <p:inputText id="nome" style="width: 100%"
                                              required="true"

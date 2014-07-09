@@ -4,6 +4,8 @@ import creago.dfisc.afg.sifis.planejamento.entities.Bairro;
 import creago.dfisc.afg.sifis.planejamento.facade.BairroFacade;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 
@@ -11,6 +13,8 @@ import javax.faces.context.FacesContext;
  *
  * @author Tiago Borges Pereira
  */
+@SessionScoped
+@ManagedBean
 public class BairroBean {
 
     private Bairro bairro;

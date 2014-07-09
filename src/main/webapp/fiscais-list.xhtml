@@ -9,7 +9,7 @@
     <h:body>
         <ui:composition template="common/common-layout.xhtml">
             <ui:define name="content">
-                <h1 class="page-heading">Fiscais <small>Lista de fiscais</small></h1>
+                <h1 class="page-heading"><i class="fa fa-users icon-sidebar"></i> Lista de fiscais</h1>
                 <!-- End page heading -->
 
                 <!-- Begin breadcrumb -->
@@ -50,7 +50,7 @@
                                                 <p:inputText id="globalFilter"
                                                              onkeyup="PF('fiscaisTable').filter()"
                                                              style="width:250px"
-                                                             placeholder="Nome do fiscal..."/>
+                                                             placeholder="Digite sua busca aqui..."/>
                                             </p:outputPanel>
                                         </div>
                                     </f:facet>
@@ -163,7 +163,7 @@
                                                 <h:selectOneMenu  id="lotacao"
                                                                   styleClass="form-control"
                                                                   required="true"
-                                                                  value="#{fiscais.inspetoria.nome}"
+                                                                  value="#{fiscais.inspetoria.idinspetoria}"
                                                                   requiredMessage="Informe a lotação do novo fiscal"
                                                                   label="lotacao"
                                                                   style="width:100%">

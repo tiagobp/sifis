@@ -33,7 +33,7 @@ public class UsuarioDAO {
 
     @SuppressWarnings("unchecked")
     public List<Usuario> findAll() {
-        return entityManager.createQuery("FROM " + Usuario.class.getName())
+        return entityManager.createQuery("FROM " + Usuario.class.getName() + " u ORDER BY u.nome, u.sobrenome")
                 .getResultList();
     }
 
