@@ -2,7 +2,6 @@ package creago.dfisc.afg.sifis.planejamento.entities;
 // Generated 10/06/2014 11:59:13 by Hibernate Tools 3.6.0
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**

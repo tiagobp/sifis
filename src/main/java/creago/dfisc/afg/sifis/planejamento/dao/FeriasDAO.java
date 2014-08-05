@@ -42,6 +42,7 @@ public class FeriasDAO {
             entityManager.getTransaction().begin();
             entityManager.persist(ferias);
             entityManager.getTransaction().commit();
+            entityManager.refresh(ferias);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -57,6 +58,7 @@ public class FeriasDAO {
             persisted.setFiscal(ferias.getFiscal());
             entityManager.merge(persisted);
             entityManager.getTransaction().commit();
+            entityManager.refresh(ferias);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();

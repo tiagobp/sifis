@@ -9,8 +9,8 @@ import creago.dfisc.afg.sifis.planejamento.facade.FeriadoFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.JurisdicaoFacade;
 import java.io.Serializable;
 import java.util.List;
-import org.primefaces.event.RowEditEvent;
 import javax.faces.bean.*;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -105,7 +105,7 @@ public class CidadeBean extends AbstractBean implements Serializable {
     public void onRowEdit(RowEditEvent event) {
         Cidade cidadeAlterada = (Cidade) event.getObject();
         cidadeAlterada.setNome(cidadeAlterada.getNome().toUpperCase());
-        cidadeFacade.update(cidadeAlterada);
+        getCidadeFacade().update(cidadeAlterada);
         displayInfoMessageToUser("Cidade Atualizada.");
     }
 
@@ -203,7 +203,7 @@ public class CidadeBean extends AbstractBean implements Serializable {
             resetFeriado();
 
             return "cidades-details";
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             displayErrorMessageToUser("Erro ao adicionar feriado municipal!");
@@ -327,9 +327,6 @@ public class CidadeBean extends AbstractBean implements Serializable {
     // LOADERS AND RESETERS
     // cidade
     private void loadCidades() {
-        filteredCidades = null;
-        filteredJurisdicoes = null;
-        filteredFeriados = null;
         cidades = getCidadeFacade().listAll();
     }
 
@@ -355,4 +352,5 @@ public class CidadeBean extends AbstractBean implements Serializable {
     private void resetFeriado() {
         feriado = new Feriado();
     }
+
 }

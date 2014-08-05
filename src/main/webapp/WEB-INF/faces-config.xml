@@ -124,6 +124,43 @@
         </navigation-case>
     </navigation-rule>
     
+    <!-- Detalhes do fiscal -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>fiscais-details</from-outcome>
+            <to-view-id>/fiscais-details.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Cadastrar novas férias -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>fiscais-new-ferias</from-outcome>
+            <to-view-id>/fiscais-new-ferias.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- ================== ROTA CONFIGURATION ================== -->
+    <!-- Listar rotas -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>rotas-list</from-outcome>
+            <to-view-id>/rotas-list.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Cadastrar nova rota -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>rotas-new</from-outcome>
+            <to-view-id>/rotas-new.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
     <!-- ========================== MANAGED BEANS ========================== -->
     <managed-bean>
         <managed-bean-name>FeriadoView</managed-bean-name>

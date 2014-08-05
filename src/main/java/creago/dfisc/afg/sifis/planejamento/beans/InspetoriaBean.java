@@ -149,10 +149,6 @@ public class InspetoriaBean extends AbstractBean implements Serializable {
     }
 
     private void loadInspetoria() {
-        filteredInspetorias = null;
-        filteredCidades = null;
-        filteredFiscais = null;
-        filteredRotas = null;
         inspetorias = getInspetoriaFacade().listAll();
     }
 

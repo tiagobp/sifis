@@ -43,6 +43,7 @@ public class FeriadoDAO {
             entityManager.getTransaction().begin();
             entityManager.persist(feriado);
             entityManager.getTransaction().commit();
+            entityManager.refresh(feriado);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -58,6 +59,7 @@ public class FeriadoDAO {
             persisted.setIsFixo(feriado.getIsFixo());
             entityManager.merge(persisted);
             entityManager.getTransaction().commit();
+            entityManager.refresh(feriado);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();

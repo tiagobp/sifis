@@ -42,8 +42,8 @@ public class CidadeDAO {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(cidade);
-            entityManager.refresh(cidade);
             entityManager.getTransaction().commit();
+            entityManager.refresh(cidade);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -57,8 +57,8 @@ public class CidadeDAO {
             persisted.setNome(cidade.getNome());
             persisted.setInspetoria(cidade.getInspetoria());
             entityManager.merge(persisted);
-            entityManager.refresh(cidade);
             entityManager.getTransaction().commit();
+            entityManager.refresh(cidade);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();

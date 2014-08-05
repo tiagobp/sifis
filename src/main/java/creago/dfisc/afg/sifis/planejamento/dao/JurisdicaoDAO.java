@@ -41,8 +41,8 @@ public class JurisdicaoDAO {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(jurisdicao);
-            entityManager.refresh(jurisdicao);
             entityManager.getTransaction().commit();
+            entityManager.refresh(jurisdicao);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -56,6 +56,7 @@ public class JurisdicaoDAO {
             persisted.setNome(jurisdicao.getNome());
             entityManager.merge(persisted);
             entityManager.getTransaction().commit();
+            entityManager.refresh(jurisdicao);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();

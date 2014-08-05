@@ -42,6 +42,7 @@ public class FiscalDAO {
             entityManager.getTransaction().begin();
             entityManager.persist(fiscal);
             entityManager.getTransaction().commit();
+            entityManager.refresh(fiscal);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -51,8 +52,16 @@ public class FiscalDAO {
     public void merge(Fiscal fiscal) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(fiscal);
+            Fiscal persisted = getById(fiscal.getIdfiscal());
+            persisted.setNome(fiscal.getNome());
+            persisted.setSobrenome(fiscal.getSobrenome());
+            persisted.setMatricula(fiscal.getMatricula());
+            persisted.setSigla(fiscal.getSigla());
+            persisted.setIsAtivo(fiscal.getIsAtivo());
+            persisted.setInspetoria(fiscal.getInspetoria());
+            entityManager.merge(persisted);
             entityManager.getTransaction().commit();
+            entityManager.refresh(fiscal);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();

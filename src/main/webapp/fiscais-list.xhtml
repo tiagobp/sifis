@@ -109,7 +109,7 @@
                                               filterBy="#{fiscais.sigla}"
                                               filterMatchMode="contains"
                                               filterStyle="display:none"
-                                              style="width:60px">
+                                              style="width:65px">
                                         <p:cellEditor>
                                             <f:facet name="output">
                                                 <h:outputText value="#{fiscais.sigla}"/>
@@ -178,12 +178,12 @@
                                     </p:column>
 
                                     <p:column id="fiscalAtivo"
-                                              headerText="ATIVO"
-                                              style="width:65px">
+                                              headerText="SITUAÇÃO"
+                                              style="width:100px">
                                         <p:cellEditor>
                                             <f:facet name="output">
-                                                <h:outputText value="SIM" rendered="#{fiscais.isAtivo}"/>
-                                                <h:outputText value="NÃO" rendered="#{not fiscais.isAtivo}"/>
+                                                <h:outputText value="ATIVO" rendered="#{fiscais.isAtivo}"/>
+                                                <h:outputText value="INATIVO" rendered="#{not fiscais.isAtivo}"/>
                                             </f:facet>
                                             <f:facet name="input">
                                                 <p:selectBooleanCheckbox styleClass="form-control" 
