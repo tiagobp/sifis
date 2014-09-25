@@ -42,6 +42,7 @@ public class RotaDAO {
             entityManager.getTransaction().begin();
             entityManager.persist(rota);
             entityManager.getTransaction().commit();
+            entityManager.refresh(rota);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -60,6 +61,7 @@ public class RotaDAO {
             persisted.setInspetoria(rota.getInspetoria());
             entityManager.merge(persisted);
             entityManager.getTransaction().commit();
+            entityManager.refresh(rota);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();

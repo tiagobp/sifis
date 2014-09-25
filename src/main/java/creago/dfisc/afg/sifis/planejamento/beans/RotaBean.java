@@ -8,6 +8,7 @@ import creago.dfisc.afg.sifis.planejamento.facade.RotaFacade;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -31,14 +32,14 @@ public class RotaBean extends AbstractBean implements Serializable {
     private List<Rota> filteredRotas;
 
     //CIDADE
-    private List<Cidade> cidadesSource;
-    private List<Cidade> cidadesTarget;
+    private List<Cidade> cidadesSource = new ArrayList<>();
+    private List<Cidade> cidadesTarget = new ArrayList<>();
     private DualListModel<Cidade> cidades;
 
     //FACADE
     private RotaFacade rotaFacade;
     private CidadeFacade cidadeFacade;
-
+    
     public RotaFacade getRotaFacade() {
         if (rotaFacade == null) {
             rotaFacade = new RotaFacade();
@@ -70,7 +71,7 @@ public class RotaBean extends AbstractBean implements Serializable {
     public String newRota() {
         cidadesSource = getCidadeFacade().listAll();
         cidadesTarget = new ArrayList<>();
-        cidades = new DualListModel<>(cidadesSource, cidadesTarget);
+        this.cidades = new DualListModel<>(cidadesSource, cidadesTarget);
         return "rotas-new";
     }
 
@@ -176,4 +177,5 @@ public class RotaBean extends AbstractBean implements Serializable {
         rota.setInspetoria(new Inspetoria());
     }
 
+    //
 }

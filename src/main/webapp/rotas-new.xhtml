@@ -82,7 +82,7 @@
 
                             <div class="form-group">
                                 <h:outputLabel for="quilometragem"
-                                               value="QUILOMETRAEM:"
+                                               value="QUILOMETRAGEM:"
                                                style="font-weight: bold;"/><br/>
                                 <p:inputText id="quilometragem"
                                              required="true"
@@ -121,7 +121,7 @@
 
                             <div class="form-group">
                                 <h:outputLabel for="cidadesPickList"
-                                               value="Cidades:"
+                                               value="CIDADES:"
                                                style="font-weight: bold;"/><br/>
                                 <p:pickList id="cidadesPickList"
                                             value="#{rotaBean.cidades}"
@@ -130,7 +130,7 @@
                                             requiredMessage="Ao menos uma cidade deve ser selecionada"
                                             effect="bounce"  
                                             itemValue="#{cidade}"
-                                            itemLabel="#{cidade}"
+                                            itemLabel="#{cidade.nome}"
                                             converter="pickListConverter"
                                             showCheckbox="true"  
                                             showSourceFilter="true"
@@ -141,7 +141,7 @@
                                     <f:facet name="targetCaption">Selecionadas</f:facet>
                                     <p:ajax event="transfer" listener="#{rotaBean.onTransfer}" update="msg" />
                                     <p:column style="width:90%;">
-                                        <h:outputText value="#{cidade.nomeCidade}" />
+                                        <h:outputText value="#{cidade.nome}" />
                                     </p:column>
                                 </p:pickList>
                                 <p:message for="cidadesPickList"/>
@@ -149,7 +149,7 @@
 
                             <p:commandButton id="cadastrar"
                                              value="Cadastrar"
-                                             action="#{RotaView.salvarRota()}"
+                                             action="#{rotaBean.create()}"
                                              ajax="false"
                                              styleClass="btn btn-info btn-rounded-lg"/>&nbsp;
                             <p:commandButton id="resetar"
