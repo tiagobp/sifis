@@ -1,6 +1,6 @@
 package creago.dfisc.afg.sifis.planejamento.utils;
 
-import creago.dfisc.afg.sifis.planejamento.entities.Cidade;
+import creago.dfisc.afg.sifis.planejamento.entities.Jurisdicao;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -22,7 +22,7 @@ public class PickListConverter implements Converter {
             Object dualList = ((PickList) arg1).getValue();
             DualListModel dl = (DualListModel) dualList;
             for (Object o : dl.getSource()) {
-                String id = "" + ((Cidade) o).getIdcidade();
+                String id = "" + ((Jurisdicao) o).getIdjurisdicao();
                 if (arg2.equals(id)) {
                     ret = o;
                     break;
@@ -30,7 +30,7 @@ public class PickListConverter implements Converter {
             }
             if (ret == null) {
                 for (Object o : dl.getTarget()) {
-                    String id = "" + ((Cidade) o).getIdcidade();
+                    String id = "" + ((Jurisdicao) o).getIdjurisdicao();
                     if (arg2.equals(id)) {
                         ret = o;
                         break;
@@ -44,8 +44,8 @@ public class PickListConverter implements Converter {
     @Override
     public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
         String str = "";
-        if (arg2 instanceof Cidade) {
-            str = "" + ((Cidade) arg2).getIdcidade();
+        if (arg2 instanceof Jurisdicao) {
+            str = "" + ((Jurisdicao) arg2).getIdjurisdicao();
         }
         return str;
     }

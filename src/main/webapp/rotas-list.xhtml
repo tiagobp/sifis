@@ -54,8 +54,8 @@
                                         </div>
                                     </f:facet>
 
-                                    <p:ajax event="rowEdit" listener="#{RotaView.onRowEdit}" update=":rotasForm:messages" />
-                                    <p:ajax event="rowEditCancel" listener="#{RotaView.onCancel}" update=":rotasForm:messages" />
+                                    <p:ajax event="rowEdit" listener="#{rotaBean.onRowEdit}" update=":rotasForm:messages" />
+                                    <p:ajax event="rowEditCancel" listener="#{rotaBean.onCancel}" update=":rotasForm:messages" />
 
                                     <!-- Coluna com os nomes das inspetorias das rotas -->
                                     <p:column headerText="INSPETORIA"

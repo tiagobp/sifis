@@ -8,7 +8,9 @@ import creago.dfisc.afg.sifis.planejamento.facade.CidadeFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.FeriadoFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.JurisdicaoFacade;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.faces.bean.*;
 import org.primefaces.event.RowEditEvent;
 
@@ -70,6 +72,10 @@ public class CidadeBean extends AbstractBean implements Serializable {
         try {
             cidade.setNome(cidade.getNome().toUpperCase());
             getCidadeFacade().create(cidade);
+            jurisdicao = new Jurisdicao();
+            jurisdicao.setCidade(cidade);
+            jurisdicao.setNome("JURISDIÇÃO 01");
+            getJurisdicaoFacade().create(jurisdicao);
             displayInfoMessageToUser("Cidade cadastrada com sucesso!");
             loadCidades();
             resetCidade();

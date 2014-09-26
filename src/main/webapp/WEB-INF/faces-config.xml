@@ -155,6 +155,14 @@
     <!-- Cadastrar nova rota -->
     <navigation-rule>
         <navigation-case>
+            <from-outcome>rotas-inspetoria-selection</from-outcome>
+            <to-view-id>/rotas-inspetoria-selection.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
             <from-outcome>rotas-new</from-outcome>
             <to-view-id>/rotas-new.xhtml</to-view-id>
             <redirect/>

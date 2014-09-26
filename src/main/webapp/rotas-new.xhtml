@@ -9,7 +9,7 @@
     <style>
         .ui-picklist-list {
             height:300px !important;
-            width:315px !important;
+            width:350px !important;
         }
     </style>
     <h:body>
@@ -36,22 +36,34 @@
                         <p:growl id="msg" showDetail="true" escape="false" />
                         <div class="the-box">
                             <div class="form-group">
-                                <h:outputLabel for="inspetoria"
-                                               value="INSPETORIA:"
-                                               style="font-weight: bold"/><br/>
-                                <h:selectOneMenu  id="inspetoria"
-                                                  required="true"
-                                                  styleClass="form-control"
-                                                  value="#{rotaBean.rota.inspetoria.idinspetoria}"
-                                                  requiredMessage="Selecione a inspetoria resposável pela nova rota"
-                                                  label="inspetoria">
-                                    <f:selectItem itemLabel="Selecione" itemValue="" />
-                                    <f:selectItems value="#{inspetoriaBean.inspetorias}"
-                                                   var="inspetoria"
-                                                   itemLabel="#{inspetoria.nome}"
-                                                   itemValue="#{inspetoria.idinspetoria}"/>
-                                </h:selectOneMenu>
-                                <p:message for="inspetoria" />
+                                <h:outputLabel for="cidadesPickList"
+                                               value="CIDADES:"
+                                               style="font-weight: bold;"/><br/>
+                                <p:pickList id="cidadesPickList"
+                                            value="#{rotaBean.jurisdicoes}"
+                                            var="jurisdicao"
+                                            required="true"
+                                            requiredMessage="Ao menos uma cidade deve ser selecionada"
+                                            effect="bounce"  
+                                            itemValue="#{jurisdicao}"
+                                            itemLabel="#{jurisdicao.nome}"
+                                            converter="pickListConverter"
+                                            showCheckbox="true"  
+                                            showSourceFilter="true"
+                                            showTargetFilter="true" 
+                                            filterMatchMode="contains">  
+
+                                    <f:facet name="sourceCaption">Disponíveis</f:facet>  
+                                    <f:facet name="targetCaption">Selecionadas</f:facet>
+                                    <p:ajax event="transfer" listener="#{rotaBean.onTransfer}" update="msg" />
+                                    <p:column style="width:60%;">
+                                        <h:outputText value="#{jurisdicao.cidade.nome}" />
+                                    </p:column>
+                                    <p:column style="width:35%;">
+                                        <h:outputText value="#{jurisdicao.nome}" />
+                                    </p:column>
+                                </p:pickList>
+                                <p:message for="cidadesPickList"/>
                             </div>
 
                             <div class="form-group">
@@ -117,34 +129,6 @@
                                              requiredMessage="Informe a quantidade de almoços da nova Rota"
                                              label="almocos"/>
                                 <p:message for="almocos" />
-                            </div>
-
-                            <div class="form-group">
-                                <h:outputLabel for="cidadesPickList"
-                                               value="CIDADES:"
-                                               style="font-weight: bold;"/><br/>
-                                <p:pickList id="cidadesPickList"
-                                            value="#{rotaBean.cidades}"
-                                            var="cidade"
-                                            required="true"
-                                            requiredMessage="Ao menos uma cidade deve ser selecionada"
-                                            effect="bounce"  
-                                            itemValue="#{cidade}"
-                                            itemLabel="#{cidade.nome}"
-                                            converter="pickListConverter"
-                                            showCheckbox="true"  
-                                            showSourceFilter="true"
-                                            showTargetFilter="true" 
-                                            filterMatchMode="contains" >  
-
-                                    <f:facet name="sourceCaption">Disponíveis</f:facet>  
-                                    <f:facet name="targetCaption">Selecionadas</f:facet>
-                                    <p:ajax event="transfer" listener="#{rotaBean.onTransfer}" update="msg" />
-                                    <p:column style="width:90%;">
-                                        <h:outputText value="#{cidade.nome}" />
-                                    </p:column>
-                                </p:pickList>
-                                <p:message for="cidadesPickList"/>
                             </div>
 
                             <p:commandButton id="cadastrar"
