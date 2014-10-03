@@ -31,7 +31,7 @@ public class FiscalBean extends AbstractBean implements Serializable {
     private List<Ferias> filteredFerias;
     
     private Viagem viagem;
-    private Viagem selectedViagens;
+    private Viagem selectedViagem;
     private List<Viagem> filteredViagens;
 
     private FiscalFacade fiscalFacade;
@@ -260,12 +260,12 @@ public class FiscalBean extends AbstractBean implements Serializable {
         this.viagem = viagem;
     }
 
-    public Viagem getSelectedViagens() {
-        return selectedViagens;
+    public Viagem getSelectedViagem() {
+        return selectedViagem;
     }
 
-    public void setSelectedViagens(Viagem selectedViagens) {
-        this.selectedViagens = selectedViagens;
+    public void setSelectedViagem(Viagem selectedViagens) {
+        this.selectedViagem = selectedViagens;
     }
 
     public List<Viagem> getFilteredViagens() {

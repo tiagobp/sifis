@@ -22,8 +22,13 @@
                 <!-- End breadcrumb -->
 
                 <div class="the-box">
-                    <h4 class="small-title"><i class="fa fa-users icon-sidebar"></i> DETALHES DO FISCAL</h4>
-
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <i class="fa fa-user icon-sidebar"></i>
+                            DETALHES DO FISCAL
+                            <br/>
+                        </div>
+                    </div>
                     <h:panelGrid columns="2">
                         <h:outputText value="NOME:" style="font-weight:bold;padding-left:20px;"/>
                         <h:outputText value="#{fiscalBean.selectedFiscal.nome} #{fiscalBean.selectedFiscal.sobrenome}" style="padding-left:20px;"/>
@@ -178,10 +183,14 @@
                                             </div>
                                         </f:facet>
 
-                                        <p:ajax event="rowEdit" listener="#{fiscalBean.onRowEditViagem}" update=":viagensForm:messages" />
-                                        <p:ajax event="rowEditCancel" listener="#{fiscalBean.onCancelViagem}" update=":viagensForm:messages" />
-
-                                        <p:column headerText="Rota"
+                                        <p:column headerText="INSPETORIA"
+                                                  rendered="true"
+                                                  filterBy="#{viagens.rota.inspetoria.nome}"
+                                                  filterMatchMode="contains"
+                                                  filterStyle="display:none">
+                                            <h:outputText value="#{viagens.rota.inspetoria.nome}"/>
+                                        </p:column>
+                                        <p:column headerText="ROTA"
                                                   rendered="true"
                                                   filterBy="#{viagens.rota.nome}"
                                                   filterMatchMode="contains"
@@ -190,92 +199,30 @@
                                         </p:column>
 
                                         <p:column id="inicioViagem"
-                                                  headerText="Data de Início"
+                                                  headerText="INÍCIO"
                                                   rendered="true"
                                                   filterBy="#{viagens.inicio}"
                                                   filterMatchMode="contains"
                                                   filterStyle="display:none">
-                                            <p:cellEditor>
-                                                <f:facet name="output">
-                                                    <h:outputText value="#{viagens.inicio}">
-                                                        <f:convertDateTime pattern="dd/MM/yyyy"
-                                                                           timeZone="America/Sao_Paulo"/>
-                                                    </h:outputText>
-                                                </f:facet>
-                                                <f:facet name="input">
-                                                    <p:calendar id="inputInicioViagem"
-                                                                locale="pt_BR"
-                                                                style="width:100%"
-                                                                showButtonPanel="true"
-                                                                effect="explode"
-                                                                navigator="true"
-                                                                readonlyInput="true"
-                                                                required="true"
-                                                                requiredMessage="Informe a data de início da viagem"
-                                                                pattern="dd/MM/yyyy"
-                                                                value="#{viagens.inicio}"
-                                                                label="inicioViagem"/>
-                                                </f:facet>
-                                            </p:cellEditor>
+                                            <h:outputText value="#{viagens.inicio}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy"
+                                                                   timeZone="America/Sao_Paulo"/>
+                                            </h:outputText>
                                         </p:column>
 
                                         <p:column id="fimViagem"
-                                                  headerText="Data de Término"
+                                                  headerText="FIM"
                                                   rendered="true"
                                                   filterBy="#{viagens.fim}"
                                                   filterMatchMode="contains"
                                                   filterStyle="display:none">
-                                            <p:cellEditor>
-                                                <f:facet name="output">
-                                                    <h:outputText value="#{viagens.fim}">
-                                                        <f:convertDateTime pattern="dd/MM/yyyy"
-                                                                           timeZone="America/Sao_Paulo"/>
-                                                    </h:outputText>
-                                                </f:facet>
-                                                <f:facet name="input">
-                                                    <p:calendar id="inputFimViagem"
-                                                                locale="pt_BR"
-                                                                style="width:100%"
-                                                                showButtonPanel="true"
-                                                                effect="explode"
-                                                                navigator="true"
-                                                                readonlyInput="true"
-                                                                required="true"
-                                                                requiredMessage="Informe a data de término da viagem"
-                                                                pattern="dd/MM/yyyy"
-                                                                value="#{viagens.fim}"
-                                                                label="fimViagem"/>
-                                                </f:facet>
-                                            </p:cellEditor>
+                                            <h:outputText value="#{viagens.fim}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy"
+                                                                   timeZone="America/Sao_Paulo"/>
+                                            </h:outputText>
                                         </p:column>
 
-                                        <!-- Coluna com a categoria -->
-                                        <p:column headerText="Categoria"
-                                                  rendered="true"
-                                                  filterBy="#{viagens.categoria.nome}"
-                                                  filterMatchMode="contains"
-                                                  filterStyle="display:none">
-                                            <p:cellEditor>
-                                                <f:facet name="output">
-                                                    <h:outputText value="#{viagens.categoria.nome}"/>
-                                                </f:facet>
-                                                <f:facet name="input">
-                                                    <p:selectOneMenu id="categoria"
-                                                                     style="width:100%"
-                                                                     required="true"
-                                                                     requiredMessage="Informe o nome da categoria"
-                                                                     value="#{viagens.categoria.idcategoria}">  
-                                                        <f:selectItem itemLabel="Selecione"/>  
-                                                        <f:selectItems value="#{categoriaBean.categorias}"
-                                                                       var="categorias"
-                                                                       itemLabel="#{categorias.nome}"
-                                                                       itemValue="#{categorias.idcategoria}"/>  
-                                                    </p:selectOneMenu>
-                                                </f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-                                        
-                                        <p:column style="width:4%">
+                                        <p:column style="width:37px">
                                             <f:facet name="header">
                                                 <span class="ui-icon ui-icon-search" title="Detalhes"></span>
                                             </f:facet>
@@ -283,29 +230,7 @@
                                                            update=":viagensForm"
                                                            styleClass="ui-icon ui-icon-search"
                                                            title="Detalhes"
-                                                           oncomplete="detalhesDialog.show()">
-                                                <f:setPropertyActionListener value="#{viagens}"
-                                                                             target="#{fiscalBean.selectedViagem}" />
-                                            </p:commandLink>
-                                        </p:column>
-
-                                        <p:column style="width:4%">
-                                            <f:facet name="header">
-                                                <span class="ui-icon ui-icon-pencil" title="Atualizar"></span>
-                                            </f:facet>
-                                            <p:rowEditor id="editor" />
-                                            <p:tooltip for="editor" value="Atualizar"/>
-                                        </p:column>
-
-                                        <p:column style="width:4%">
-                                            <f:facet name="header">
-                                                <span class="ui-icon ui-icon-trash" title="Excluir"></span>
-                                            </f:facet>
-                                            <p:commandLink id="deletButton"
-                                                           update=":viagensForm"
-                                                           action="#{fiscalBean.removeViagem()}"
-                                                           styleClass="ui-icon ui-icon-trash"
-                                                           title="Excluir">
+                                                           action="fiscais-details-viagem">
                                                 <f:setPropertyActionListener value="#{viagens}"
                                                                              target="#{fiscalBean.selectedViagem}" />
                                             </p:commandLink>

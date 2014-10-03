@@ -42,6 +42,7 @@ public class CategoriaDAO {
             entityManager.getTransaction().begin();
             entityManager.persist(categoria);
             entityManager.getTransaction().commit();
+            entityManager.refresh(categoria);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -56,6 +57,7 @@ public class CategoriaDAO {
             persisted.setCor(categoria.getCor());
             entityManager.merge(persisted);
             entityManager.getTransaction().commit();
+            entityManager.refresh(categoria);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();

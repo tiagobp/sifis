@@ -42,6 +42,7 @@ public class ViagemDAO {
             entityManager.getTransaction().begin();
             entityManager.persist(viagem);
             entityManager.getTransaction().commit();
+            entityManager.refresh(viagem);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -59,6 +60,7 @@ public class ViagemDAO {
             persisted.setRota(viagem.getRota());
             entityManager.merge(persisted);
             entityManager.getTransaction().commit();
+            entityManager.refresh(viagem);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();

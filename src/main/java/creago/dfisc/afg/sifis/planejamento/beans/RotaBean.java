@@ -4,6 +4,7 @@ import creago.dfisc.afg.sifis.planejamento.entities.Cidade;
 import creago.dfisc.afg.sifis.planejamento.entities.Inspetoria;
 import creago.dfisc.afg.sifis.planejamento.entities.Jurisdicao;
 import creago.dfisc.afg.sifis.planejamento.entities.Rota;
+import creago.dfisc.afg.sifis.planejamento.entities.Viagem;
 import creago.dfisc.afg.sifis.planejamento.facade.CidadeFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.InspetoriaFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.JurisdicaoFacade;
@@ -38,6 +39,9 @@ public class RotaBean extends AbstractBean implements Serializable {
     private List<Jurisdicao> jurisdicaoSource = new ArrayList<>();
     private List<Jurisdicao> jurisdicaoTarget = new ArrayList<>();
     private DualListModel<Jurisdicao> jurisdicoes;
+    
+    //VIAGEM
+    private Viagem selectedViagem;
 
     //INSPETORIA
     private List<Inspetoria> inspetorias;
@@ -203,6 +207,15 @@ public class RotaBean extends AbstractBean implements Serializable {
 
     public void setSelectedInspetoria(Inspetoria selectedInspetoria) {
         this.selectedInspetoria = selectedInspetoria;
+    }
+    
+    //VIAGENS
+    public Viagem getSelectedViagem() {
+        return selectedViagem;
+    }
+
+    public void setSelectedViagem(Viagem selectedViagem) {    
+        this.selectedViagem = selectedViagem;
     }
 
     //JURISDICOES

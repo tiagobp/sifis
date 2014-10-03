@@ -24,6 +24,8 @@ public class InspetoriaBean extends AbstractBean implements Serializable {
     private Inspetoria selectedInspetoria;
     private List<Inspetoria> filteredInspetorias;
     
+    private Rota selectedRota;
+    
     private List<Cidade> filteredCidades;
     private List<Fiscal> filteredFiscais;
     private List<Rota> filteredRotas;
@@ -147,6 +149,15 @@ public class InspetoriaBean extends AbstractBean implements Serializable {
     public void setFilteredRotas(List<Rota> filteredRotas) {
         this.filteredRotas = filteredRotas;
     }
+
+    public Rota getSelectedRota() {
+        return selectedRota;
+    }
+
+    public void setSelectedRota(Rota selectedRota) {
+        this.selectedRota = selectedRota;
+    }
+    
 
     private void loadInspetoria() {
         inspetorias = getInspetoriaFacade().listAll();

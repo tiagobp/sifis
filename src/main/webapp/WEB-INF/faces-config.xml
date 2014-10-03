@@ -4,6 +4,23 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     
+    <!-- ================== CATEGORIA CONFIGURATION ================== -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>categorias-list</from-outcome>
+            <to-view-id>/categorias-list.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>categorias-new</from-outcome>
+            <to-view-id>/categorias-new.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
     <!-- ================== FERIADO CONFIGURATION ================== -->
     <!-- Listar feriados -->
     <navigation-rule>
@@ -38,6 +55,14 @@
         <navigation-case>
             <from-outcome>inspetorias-details</from-outcome>
             <to-view-id>/inspetorias-details.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>inspetorias-details-rota</from-outcome>
+            <to-view-id>/inspetorias-details-rota.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -133,6 +158,14 @@
         </navigation-case>
     </navigation-rule>
     
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>fiscais-details-viagem</from-outcome>
+            <to-view-id>/fiscais-details-viagem.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
     <!-- Cadastrar novas férias -->
     <navigation-rule>
         <navigation-case>
@@ -165,6 +198,47 @@
         <navigation-case>
             <from-outcome>rotas-new</from-outcome>
             <to-view-id>/rotas-new.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>rotas-details</from-outcome>
+            <to-view-id>/rotas-details.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>rotas-details-viagem</from-outcome>
+            <to-view-id>/rotas-details-viagem.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- ================== VIAGEM CONFIGURATION ================== -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>viagens-list</from-outcome>
+            <to-view-id>/viagens-list.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>viagens-new</from-outcome>
+            <to-view-id>/viagens-new.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>viagens-details</from-outcome>
+            <to-view-id>/viagens-details.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

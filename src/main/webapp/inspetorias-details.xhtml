@@ -154,17 +154,23 @@
                                                     </p:outputPanel>
                                                 </div>
                                             </f:facet>
-                                            <p:column headerText="NOME"
+                                            <p:column headerText="ROTA"
                                                       filterBy="#{rotas.nome}"
                                                       filterMatchMode="contains"
                                                       filterStyle="display:none" >
                                                 <h:outputText value="#{rotas.nome}" />
                                             </p:column>
+                                            <p:column headerText="REVISITA"
+                                                      filterBy="#{rotas.criterioRevisita}"
+                                                      filterMatchMode="contains"
+                                                      filterStyle="display:none" >
+                                                <h:outputText value="#{rotas.criterioRevisita} dias" />
+                                            </p:column>
                                             <p:column headerText="KM"
                                                       filterBy="#{rotas.quilometragem}"
                                                       filterMatchMode="contains"
                                                       filterStyle="display:none" >
-                                                <h:outputText value="#{rotas.quilometragem}" />
+                                                <h:outputText value="#{rotas.quilometragem} km" />
                                             </p:column>
                                             <p:column headerText="DIÁRIAS"
                                                       filterBy="#{rotas.diaria}"
@@ -178,11 +184,19 @@
                                                       filterStyle="display:none" >
                                                 <h:outputText value="#{rotas.almoco}" />
                                             </p:column>
-                                            <p:column headerText="REVISITA"
-                                                      filterBy="#{rotas.criterioRevisita}"
-                                                      filterMatchMode="contains"
-                                                      filterStyle="display:none" >
-                                                <h:outputText value="#{rotas.criterioRevisita}" />
+
+                                            <p:column style="width:37px">
+                                                <f:facet name="header">
+                                                    <span class="ui-icon ui-icon-search" title="Detalhes"></span>
+                                                </f:facet>
+                                                <p:commandLink id="selectButton"
+                                                               update=":rotasForm"
+                                                               styleClass="ui-icon ui-icon-search"
+                                                               title="Detalhes"
+                                                               action="inspetorias-details-rota">
+                                                    <f:setPropertyActionListener value="#{rotas}"
+                                                                                 target="#{inspetoriaBean.selectedRota}" />
+                                                </p:commandLink>
                                             </p:column>
                                         </p:dataTable>
                                     </h:form>
