@@ -243,6 +243,14 @@
         </navigation-case>
     </navigation-rule>
     
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>viagens-schedule</from-outcome>
+            <to-view-id>/viagens-schedule.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
     <!-- ========================== MANAGED BEANS ========================== -->
     <managed-bean>
         <managed-bean-name>FeriadoView</managed-bean-name>

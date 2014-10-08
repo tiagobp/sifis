@@ -11,7 +11,6 @@ import creago.dfisc.afg.sifis.planejamento.facade.InspetoriaFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.RotaFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.ViagemFacade;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -20,9 +19,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import org.primefaces.event.RowEditEvent;
-import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.ScheduleEvent;
+import org.primefaces.model.ScheduleModel;
 
 /**
  *
@@ -31,6 +32,10 @@ import org.primefaces.event.SelectEvent;
 @SessionScoped
 @ManagedBean
 public class ViagemBean extends AbstractBean implements Serializable {
+
+    //SCHEDULE
+    private ScheduleModel eventModel;
+    private DefaultScheduleEvent event = new DefaultScheduleEvent();
 
     //VIAGEM
     private Viagem viagem;
@@ -298,7 +303,7 @@ public class ViagemBean extends AbstractBean implements Serializable {
         if (isWeekend()) {
             FacesContext f = FacesContext.getCurrentInstance();
             f.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "Data inválida!", 
+                    "Data inválida!",
                     "A viagem deve ser realizada somente em dias úteis."));
         }
 
@@ -355,5 +360,32 @@ public class ViagemBean extends AbstractBean implements Serializable {
             return inicio || fim || igualInicio || igualFim;
         }
         return false;
+    }
+
+    //SCHEDULE
+    public ScheduleModel getEventModel() {
+        loadViagens();
+        startSchedule();
+        return eventModel;
+    }
+
+    public DefaultScheduleEvent getEvent() {
+        return event;
+    }
+
+    public void setEvent(DefaultScheduleEvent event) {
+        this.event = event;
+    }
+
+    public void startSchedule() {
+        eventModel = new DefaultScheduleModel();
+
+        for (Viagem v : viagens) {
+            event = new DefaultScheduleEvent(v.getRota().getNome() + " - "
+                    + v.getFiscal().getSigla(), v.getInicio(), v.getFim(), v);
+            event.setAllDay(true);
+            event.setStyleClass("categoria-" + v.getCategoria().getIdcategoria());
+            eventModel.addEvent(event);
+        }
     }
 }

@@ -185,7 +185,12 @@
                                         <p:commandButton id="novaRota"
                                                          value="Cadastrar nova viagem"
                                                          styleClass="btn btn-rounded-lg"
-                                                         action="#{viagemBean.newViagem()}"/>
+                                                         action="#{viagemBean.newViagem()}"/>&nbsp;
+                                        
+                                        <p:commandButton id="schedule"
+                                                         value="Visualizar na agenda"
+                                                         styleClass="btn btn-rounded-lg"
+                                                         action="viagens-schedule"/>
                                     </div>
                                 </f:facet>
                             </p:dataTable>

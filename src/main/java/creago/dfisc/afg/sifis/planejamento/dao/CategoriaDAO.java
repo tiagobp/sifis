@@ -2,6 +2,8 @@ package creago.dfisc.afg.sifis.planejamento.dao;
 
 import creago.dfisc.afg.sifis.planejamento.entities.Categoria;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -70,9 +72,17 @@ public class CategoriaDAO {
             categoria = entityManager.find(Categoria.class, categoria.getIdcategoria());
             entityManager.remove(categoria);
             entityManager.getTransaction().commit();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, "Categoria excluída com sucesso!", null));
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         } catch (Exception ex) {
-            ex.printStackTrace();
             entityManager.getTransaction().rollback();
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, "Esta categoria não pode ser excluída!", "Em caso de dúvida, contate o administrador do sistema."));
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+            //ex.printStackTrace();
+            
         }
     }
 
