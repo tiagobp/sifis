@@ -1,7 +1,7 @@
 package creago.dfisc.afg.sifis.planejamento.facade;
 
 import creago.dfisc.afg.sifis.planejamento.dao.UsuarioDAO;
-import creago.dfisc.afg.sifis.planejamento.entities.Usuario;
+import creago.dfisc.afg.sifis.security.entities.Usuario;
 import java.util.List;
 
 /**

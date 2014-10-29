@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 10/06/2014 11:59:14 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-  <class catalog="sifis" name="creago.dfisc.afg.sifis.planejamento.entities.Usuario" table="usuario">
+  <class catalog="sifis" name="creago.dfisc.afg.sifis.security.entities.Usuario" table="usuario">
     <id name="idusuario" type="java.lang.Long">
       <column name="idusuario"/>
       <generator class="identity"/>

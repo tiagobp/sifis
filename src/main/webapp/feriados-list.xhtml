@@ -33,7 +33,7 @@
                             <p:growl id="messages" showDetail="false"/>
                             <p:dataTable id="feriadosTable"
                                          var="feriados"
-                                         value="#{FeriadoView.feriados}"
+                                         value="#{feriadoBean.feriados}"
                                          editable="true"
                                          widgetVar="feriadosTable"
                                          emptyMessage="Nenhum feriado encontrado"
@@ -42,7 +42,7 @@
                                          rows="50"
                                          rowsPerPageTemplate="10, 25, 50, 100"
                                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                         filteredValue="#{FeriadoView.filteredFeriados}">
+                                         filteredValue="#{feriadoBean.filteredFeriados}">
 
                                 <f:facet name="header">
                                     <div align="right">
@@ -56,8 +56,8 @@
                                     </div>
                                 </f:facet>
 
-                                <p:ajax event="rowEdit" listener="#{FeriadoView.onRowEdit}" update=":feriadoNForm:messages" />
-                                <p:ajax event="rowEditCancel" listener="#{FeriadoView.onCancel}" update=":feriadoNForm:messages" />
+                                <p:ajax event="rowEdit" listener="#{feriadoBean.onRowEdit}" update=":feriadoNForm:messages" />
+                                <p:ajax event="rowEditCancel" listener="#{feriadoBean.onCancel}" update=":feriadoNForm:messages" />
 
                                 <!-- Coluna com as datas dos feriados cadastrados -->
                                 <p:column id="dataFNacional"
@@ -139,11 +139,11 @@
                                     </f:facet>
                                     <p:commandLink id="deletButton"
                                                    update=":feriadoNForm"
-                                                   action="#{FeriadoView.remove()}"
+                                                   action="#{feriadoBean.remove()}"
                                                    styleClass="ui-icon ui-icon-trash"
                                                    title="Excluir">
                                         <f:setPropertyActionListener value="#{feriados}"
-                                                                     target="#{FeriadoView.selectedFeriado}" />
+                                                                     target="#{feriadoBean.selectedFeriado}" />
                                     </p:commandLink>
                                 </p:column>
 
@@ -152,14 +152,68 @@
                                         <p:commandButton id="novoFNacional"
                                                          value="Cadastrar Novo Feriado"
                                                          styleClass="btn btn-rounded-lg"
-                                                         action="#{FeriadoView.newFeriado()}"/>
+                                                         action="#{feriadoBean.newFeriado()}"/>
                                     </div>
                                 </f:facet>
                             </p:dataTable>
                         </h:form>
-
                     </div>
                 </div>
+            </ui:define>
+            <ui:define name="javascript" >
+                <script src="assets/js/bootstrap.min.js"></script>
+                <script src="assets/plugins/retina/retina.min.js"></script>
+                <script src="assets/plugins/nicescroll/jquery.nicescroll.js"></script>
+                <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+                <script src="assets/plugins/backstretch/jquery.backstretch.min.js"></script>
+
+                <!-- PLUGINS -->
+                <script src="assets/plugins/skycons/skycons.js"></script>
+                <script src="assets/plugins/prettify/prettify.js"></script>
+                <script src="assets/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+                <script src="assets/plugins/owl-carousel/owl.carousel.min.js"></script>
+                <script src="assets/plugins/chosen/chosen.jquery.min.js"></script>
+                <script src="assets/plugins/icheck/icheck.min.js"></script>
+                <script src="assets/plugins/timepicker/bootstrap-timepicker.js"></script>
+                <script src="assets/plugins/mask/jquery.mask.min.js"></script>
+                <script src="assets/plugins/validator/bootstrapValidator.min.js"></script>
+                <script src="assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+                <script src="assets/plugins/datatable/js/bootstrap.datatable.js"></script>
+                <script src="assets/plugins/summernote/summernote.min.js"></script>
+                <script src="assets/plugins/markdown/markdown.js"></script>
+                <script src="assets/plugins/markdown/to-markdown.js"></script>
+                <script src="assets/plugins/markdown/bootstrap-markdown.js"></script>
+                <script src="assets/plugins/slider/bootstrap-slider.js"></script>
+
+                <!-- EASY PIE CHART JS -->
+                <script src="assets/plugins/easypie-chart/easypiechart.min.js"></script>
+                <script src="assets/plugins/easypie-chart/jquery.easypiechart.min.js"></script>
+
+                <!-- KNOB JS -->
+                <!--[if IE]>
+                <script type="text/javascript" src="assets/plugins/jquery-knob/excanvas.js"></script>
+                <![endif]-->
+                <script src="assets/plugins/jquery-knob/jquery.knob.js"></script>
+                <script src="assets/plugins/jquery-knob/knob.js"></script>
+
+                <!-- FLOT CHART JS -->
+                <script src="assets/plugins/flot-chart/jquery.flot.js"></script>
+                <script src="assets/plugins/flot-chart/jquery.flot.tooltip.js"></script>
+                <script src="assets/plugins/flot-chart/jquery.flot.resize.js"></script>
+                <script src="assets/plugins/flot-chart/jquery.flot.selection.js"></script>
+                <script src="assets/plugins/flot-chart/jquery.flot.stack.js"></script>
+                <script src="assets/plugins/flot-chart/jquery.flot.time.js"></script>
+
+                <!-- MORRIS JS -->
+                <script src="assets/plugins/morris-chart/raphael.min.js"></script>
+                <script src="assets/plugins/morris-chart/morris.min.js"></script>
+
+                <!-- C3 JS -->
+                <script src="assets/plugins/c3-chart/d3.v3.min.js" charset="utf-8"></script>
+                <script src="assets/plugins/c3-chart/c3.min.js"></script>
+
+                <!-- MAIN APPS JS -->
+                <script src="assets/js/apps.js"></script>
             </ui:define>
         </ui:composition>
     </h:body>

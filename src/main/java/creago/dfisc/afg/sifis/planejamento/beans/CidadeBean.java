@@ -6,11 +6,10 @@ import creago.dfisc.afg.sifis.planejamento.entities.Inspetoria;
 import creago.dfisc.afg.sifis.planejamento.entities.Jurisdicao;
 import creago.dfisc.afg.sifis.planejamento.facade.CidadeFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.FeriadoFacade;
+import creago.dfisc.afg.sifis.planejamento.facade.InspetoriaFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.JurisdicaoFacade;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.faces.bean.*;
 import org.primefaces.event.RowEditEvent;
 
@@ -44,6 +43,7 @@ public class CidadeBean extends AbstractBean implements Serializable {
     private CidadeFacade cidadeFacade;
     private JurisdicaoFacade jurisdicaoFacade;
     private FeriadoFacade feriadoFacade;
+    private InspetoriaFacade inspetoriaFacade;
 
     //FACADE GETTERS
     public CidadeFacade getCidadeFacade() {
@@ -65,6 +65,13 @@ public class CidadeBean extends AbstractBean implements Serializable {
             feriadoFacade = new FeriadoFacade();
         }
         return feriadoFacade;
+    }
+
+    public InspetoriaFacade getInspetoriaFacade() {
+        if (inspetoriaFacade == null) {
+            inspetoriaFacade = new InspetoriaFacade();
+        }
+        return inspetoriaFacade;
     }
 
     // CIDADE
@@ -110,6 +117,7 @@ public class CidadeBean extends AbstractBean implements Serializable {
 
     public void onRowEdit(RowEditEvent event) {
         Cidade cidadeAlterada = (Cidade) event.getObject();
+        cidadeAlterada.setInspetoria(cidadeAlterada.getInspetoria());
         cidadeAlterada.setNome(cidadeAlterada.getNome().toUpperCase());
         getCidadeFacade().update(cidadeAlterada);
         displayInfoMessageToUser("Cidade Atualizada.");

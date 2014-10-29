@@ -5,9 +5,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+
     <h:body>
-        <ui:composition template="common/common-layout.xhtml">
+        <ui:composition template="/common/common-layout.xhtml">
             <ui:define name="content">
                 <link rel="stylesheet" type="text/css"  href="./assets/css/categoria.css"/>
                 <h1 class="page-heading"><i class="fa fa-car icon-sidebar"></i>  Agenda de viagens</h1>
@@ -32,9 +32,33 @@
                                     slotMinutes="600"
                                     axisFormat="HH"
                                     value="#{viagemBean.eventModel}">
+                            <p:ajax event="eventSelect"
+                                    listener="#{viagemBean.onEventSelect}"/>
                         </p:schedule>
                     </h:form>
                 </div>
+                <style>
+                    .feriado, .feriado .fc-event-inner, .feriado a{
+                        background-color: #d35400;
+                        border-color: #d35400;
+                        color: white;
+                        text-align: center;
+                    }
+
+                    .feriadoMunicipal, .feriadoMunicipal .fc-event-inner, .feriadoMunicipal a{
+                        background-color: #f39c12;
+                        border-color: #f39c12;
+                        color: white;
+                        text-align: center;
+                    }
+
+                    .ferias, .ferias .fc-event-inner, .ferias a{
+                        background-color: #8B7355;
+                        border-color: #8B7355;
+                        color: white;
+                        padding-left: 2px;
+                    }
+                </style>
                 <script>
                     PrimeFaces.locales['pt'] = {
                         closeText: 'Fechar',

@@ -18,5 +18,6 @@
     <mapping resource="creago/dfisc/afg/sifis/planejamento/entities/Rota.hbm.xml"/>
     <mapping resource="creago/dfisc/afg/sifis/planejamento/entities/Viagem.hbm.xml"/>
     <mapping resource="creago/dfisc/afg/sifis/planejamento/entities/Cidade.hbm.xml"/>
+    <mapping resource="creago/dfisc/afg/sifis/procedimento/entities/Procedimento.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

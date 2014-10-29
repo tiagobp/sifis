@@ -1,11 +1,15 @@
 package creago.dfisc.afg.sifis.planejamento.beans;
 
+import com.sun.faces.facelets.impl.DefaultFaceletFactory;
 import creago.dfisc.afg.sifis.planejamento.entities.Categoria;
+import creago.dfisc.afg.sifis.planejamento.entities.Feriado;
 import creago.dfisc.afg.sifis.planejamento.entities.Ferias;
 import creago.dfisc.afg.sifis.planejamento.entities.Fiscal;
 import creago.dfisc.afg.sifis.planejamento.entities.Inspetoria;
 import creago.dfisc.afg.sifis.planejamento.entities.Rota;
 import creago.dfisc.afg.sifis.planejamento.entities.Viagem;
+import creago.dfisc.afg.sifis.planejamento.facade.FeriadoFacade;
+import creago.dfisc.afg.sifis.planejamento.facade.FeriasFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.FiscalFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.InspetoriaFacade;
 import creago.dfisc.afg.sifis.planejamento.facade.RotaFacade;
@@ -18,8 +22,10 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
@@ -43,8 +49,21 @@ public class ViagemBean extends AbstractBean implements Serializable {
     private Viagem selectedViagem;
     private List<Viagem> filteredViagem;
 
+    //FERIADO
+    private List<Feriado> feriados;
+    private Feriado feriado;
+
+    //FERIAS
+    private List<Ferias> feriasList;
+    private Ferias ferias;
+
     //INSPETORIA
     private Inspetoria selectedInspetoria;
+
+    //BOOLEAN
+    private boolean isViagem;
+    private boolean isFeriado;
+    private boolean isFerias;
 
     //ROTAS E FISCAIS
     private List<Rota> rotas;
@@ -55,6 +74,8 @@ public class ViagemBean extends AbstractBean implements Serializable {
     private InspetoriaFacade inspetoriaFacade;
     private RotaFacade rotaFacade;
     private FiscalFacade fiscalFacade;
+    private FeriadoFacade feriadoFacade;
+    private FeriasFacade feriasFacade;
 
     //PAINEL CONTROLE DE VISIBILIDADE
     private boolean painelRota = false;
@@ -85,6 +106,20 @@ public class ViagemBean extends AbstractBean implements Serializable {
             fiscalFacade = new FiscalFacade();
         }
         return fiscalFacade;
+    }
+
+    public FeriadoFacade getFeriadoFacade() {
+        if (feriadoFacade == null) {
+            feriadoFacade = new FeriadoFacade();
+        }
+        return feriadoFacade;
+    }
+
+    public FeriasFacade getFeriasFacade() {
+        if (feriasFacade == null) {
+            feriasFacade = new FeriasFacade();
+        }
+        return feriasFacade;
     }
 
     // CRUD
@@ -163,6 +198,22 @@ public class ViagemBean extends AbstractBean implements Serializable {
 
     public void setViagens(List<Viagem> viagens) {
         this.viagens = viagens;
+    }
+
+    public List<Feriado> getFeriados() {
+        return feriados;
+    }
+
+    public void setFeriados(List<Feriado> feriados) {
+        this.feriados = feriados;
+    }
+
+    public List<Ferias> getFeriasList() {
+        return feriasList;
+    }
+
+    public void setFeriasList(List<Ferias> feriasList) {
+        this.feriasList = feriasList;
     }
 
     public Viagem getSelectedViagem() {
@@ -386,6 +437,57 @@ public class ViagemBean extends AbstractBean implements Serializable {
             event.setAllDay(true);
             event.setStyleClass("categoria-" + v.getCategoria().getIdcategoria());
             eventModel.addEvent(event);
+        }
+
+        feriados = getFeriadoFacade().listAll();
+        if (feriados != null) {
+            for (Feriado f : feriados) {
+                event = new DefaultScheduleEvent(f.getNome(), f.getData(), f.getData());
+                event.setAllDay(true);
+                if (f.getCidades() == null || f.getCidades().isEmpty()) {
+                    event.setStyleClass("feriado");
+                } else {
+                    event.setStyleClass("feriadoMunicipal");
+                }
+                eventModel.addEvent(event);
+            }
+        }
+
+        feriasList = getFeriasFacade().listAll();
+        if (feriasList != null) {
+            for (Ferias f : feriasList) {
+                event = new DefaultScheduleEvent("Férias - " + f.getFiscal().getNome() + " "
+                        + f.getFiscal().getSobrenome(), f.getInicio(), f.getFim());
+                event.setAllDay(true);
+                event.setStyleClass("ferias");
+                eventModel.addEvent(event);
+            }
+        }
+    }
+
+    public void onEventSelect(SelectEvent selectEvent) {
+        event = (DefaultScheduleEvent) selectEvent.getObject();
+        System.out.println(event.getTitle());
+        if (event.getStyleClass().contains("categoria")) {
+            viagem = (Viagem) event.getData();
+            isViagem = true;
+            isFeriado = false;
+            isFerias = false;
+            System.out.println("É UMA VIAGEM");
+        }
+        if (event.getStyleClass().equals("feriado")) {
+            feriado = (Feriado) event.getData();
+            isViagem = false;
+            isFeriado = true;
+            isFerias = false;
+            System.out.println("É UM FERIADO");
+        }
+        if (event.getStyleClass().equals("ferias")) {
+            ferias = (Ferias) event.getData();
+            isViagem = false;
+            isFeriado = false;
+            isFerias = true;
+            System.out.println("SÃO FÉRIAS");
         }
     }
 }

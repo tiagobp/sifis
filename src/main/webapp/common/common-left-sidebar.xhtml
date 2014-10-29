@@ -12,8 +12,8 @@
                 <ul class="sidebar-menu">
                     <li>
                         <a href="index.xhtml">
-                            <i class="fa fa-dashboard icon-sidebar"></i>
-                            Painel
+                            <i class="fa fa-home icon-sidebar"></i>
+                            Página Inicial
                         </a>
                     </li>
                     <li>
@@ -24,11 +24,11 @@
                         </a>
                         <ul class="submenu">
                             <li><a href="#fakelink">Listar ordens de serviço<span class="badge badge-success span-sidebar">5</span></a></li>
-                            <li><a href="#fakelink">Nova ordem de serviço</a></li>
+                            <li><a href="#fakelink">Cadastrar ordem de serviço</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="planejamento-schedule.xhtml">
+                        <a href="viagens-schedule.xhtml">
                             <i class="fa  fa-calendar icon-sidebar"></i>
                             <i class="fa fa-angle-right chevron-icon-sidebar"></i>
                             Planejamento
@@ -43,101 +43,24 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#fakelink">
-                            <i class="fa fa-file-text icon-sidebar"></i>
+                        <a href="procedimentos-list.xhtml">
+                            <i class="fa fa-stack-overflow icon-sidebar"></i>
                             <i class="fa fa-angle-right chevron-icon-sidebar"></i>
                             Procedimentos
                         </a>
                         <ul class="submenu">
-                            <li><a href="#fakelink">Listar procedimentos<span class="badge badge-success span-sidebar">5</span></a></li>
-                            <li><a href="#fakelink">Novo procedimento</a></li>
-                            <li><a href="#fakelink">Listar usuários</a></li>
-                            <li><a href="#fakelink">Novo usuário</a></li>
+                            <li><a href="procedimentos-list.xhtml">Listar procedimentos</a></li>
+                            <li><a href="#{procedimentoBean.newProcedimento()}.xhtml">Cadastrar procedimento</a></li>
                         </ul>
-                    </li>
-                    <li class="static">OUTROS SISTEMAS</li>
-                    
-                    <li>
-                        <a href="#fakelink">
-                            <i class="fa fa-envelope icon-sidebar"></i>
-                            <i class="fa fa-angle-right chevron-icon-sidebar"></i>
-                            Mensagens
-                            <span class="label label-danger span-sidebar">HOT</span>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="mail-contact.xhtml">Contatos</a></li>
-                            <li><a href="mail-inbox.xhtml">Entrada<span class="badge badge-success span-sidebar">5</span></a></li>
-                            <li><a href="mail-send.xhtml">Enviadas</a></li>
-                            <li><a href="mail-new.xhtml">Escrever</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#fakelink">
-                            <i class="fa fa-bell icon-sidebar"></i>
-                            Notificações
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#fakelink">
-                            <i class="fa fa-tasks icon-sidebar"></i>
-                            Tarefas
-                        </a>
                     </li>
 
+                    <br/><br/>
                     <li class="static">CONFIGURAÇÕES DO SISTEMA</li>
                     <li>
                         <a href="categorias-list.xhtml">
                             <i class="fa fa-delicious icon-sidebar"></i>
                             Categorias
                         </a>
-                    </li>
-                    <li class="text-content">
-                        <div class="switch">
-                            <div class="onoffswitch blank">
-                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="alertme"/>
-                                <label class="onoffswitch-label" for="alertme">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                </label>
-                            </div>
-                        </div>
-                        Alerta quando sistema cair
-                    </li>
-                    <li class="text-content">
-                        <div class="switch">
-                            <div class="onoffswitch blank">
-                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="autoupdate"/>
-                                <label class="onoffswitch-label" for="autoupdate">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                </label>
-                            </div>
-                        </div>
-                        Atualização automática
-                    </li>
-                    <li class="text-content">
-                        <div class="switch">
-                            <div class="onoffswitch blank">
-                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="dailyreport"/>
-                                <label class="onoffswitch-label" for="dailyreport">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                </label>
-                            </div>
-                        </div>
-                        Relatório diário de tarefas
-                    </li>
-                    <li class="text-content">
-                        <div class="switch">
-                            <div class="onoffswitch blank">
-                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="remembercomputer"/>
-                                <label class="onoffswitch-label" for="remembercomputer">
-                                    <span class="onoffswitch-inner"></span>
-                                    <span class="onoffswitch-switch"></span>
-                                </label>
-                            </div>
-                        </div>
-                        Lembrar esse computador
                     </li>
                 </ul>
             </div><!-- /.sidebar-left -->

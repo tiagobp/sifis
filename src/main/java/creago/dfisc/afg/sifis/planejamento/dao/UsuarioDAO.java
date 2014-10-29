@@ -1,6 +1,6 @@
 package creago.dfisc.afg.sifis.planejamento.dao;
 
-import creago.dfisc.afg.sifis.planejamento.entities.Usuario;
+import creago.dfisc.afg.sifis.security.entities.Usuario;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

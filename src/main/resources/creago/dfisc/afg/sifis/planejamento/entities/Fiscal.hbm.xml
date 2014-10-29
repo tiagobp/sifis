@@ -29,7 +29,7 @@
       <key>
         <column name="fiscal_idfiscal"/>
       </key>
-      <one-to-many class="creago.dfisc.afg.sifis.planejamento.entities.Usuario"/>
+      <one-to-many class="creago.dfisc.afg.sifis.security.entities.Usuario"/>
     </set>
     <set fetch="select" inverse="true" lazy="true" name="feriases" table="ferias">
       <key>

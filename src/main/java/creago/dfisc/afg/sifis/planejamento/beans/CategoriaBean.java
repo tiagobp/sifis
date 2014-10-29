@@ -12,6 +12,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import org.primefaces.event.RowEditEvent;
@@ -20,8 +21,8 @@ import org.primefaces.event.RowEditEvent;
  *
  * @author Tiago Borges Pereira
  */
-@SessionScoped
 @ManagedBean
+@SessionScoped
 public class CategoriaBean extends AbstractBean implements Serializable {
 
     //CATEGORIA
