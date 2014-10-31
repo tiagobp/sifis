@@ -1,6 +1,5 @@
 package creago.dfisc.afg.sifis.planejamento.beans;
 
-import com.sun.faces.facelets.impl.DefaultFaceletFactory;
 import creago.dfisc.afg.sifis.planejamento.entities.Categoria;
 import creago.dfisc.afg.sifis.planejamento.entities.Feriado;
 import creago.dfisc.afg.sifis.planejamento.entities.Ferias;
@@ -19,11 +18,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import javax.annotation.PostConstruct;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
@@ -35,13 +37,13 @@ import org.primefaces.model.ScheduleModel;
  *
  * @author Tiago Borges Pereira
  */
-@SessionScoped
 @ManagedBean
+@ViewScoped
 public class ViagemBean extends AbstractBean implements Serializable {
 
     //SCHEDULE
     private ScheduleModel eventModel;
-    private DefaultScheduleEvent event = new DefaultScheduleEvent();
+    private ScheduleEvent event = new DefaultScheduleEvent();
 
     //VIAGEM
     private Viagem viagem;
@@ -420,74 +422,73 @@ public class ViagemBean extends AbstractBean implements Serializable {
         return eventModel;
     }
 
-    public DefaultScheduleEvent getEvent() {
+    public ScheduleEvent getEvent() {
         return event;
     }
 
-    public void setEvent(DefaultScheduleEvent event) {
+    public void setEvent(ScheduleEvent event) {
         this.event = event;
     }
 
     public void startSchedule() {
-        eventModel = new DefaultScheduleModel();
+        this.eventModel = new DefaultScheduleModel();
 
-        for (Viagem v : viagens) {
-            event = new DefaultScheduleEvent(v.getRota().getNome() + " - "
-                    + v.getFiscal().getSigla(), v.getInicio(), v.getFim(), v);
-            event.setAllDay(true);
-            event.setStyleClass("categoria-" + v.getCategoria().getIdcategoria());
-            eventModel.addEvent(event);
-        }
-
-        feriados = getFeriadoFacade().listAll();
-        if (feriados != null) {
-            for (Feriado f : feriados) {
-                event = new DefaultScheduleEvent(f.getNome(), f.getData(), f.getData());
-                event.setAllDay(true);
-                if (f.getCidades() == null || f.getCidades().isEmpty()) {
-                    event.setStyleClass("feriado");
-                } else {
-                    event.setStyleClass("feriadoMunicipal");
-                }
-                eventModel.addEvent(event);
+        List<DefaultScheduleEvent> vgs = getViagemFacade().getViagens();
+        if (vgs != null) {
+            for (DefaultScheduleEvent v : vgs) {
+                this.event = v;
+                this.eventModel.addEvent(this.event);
             }
         }
 
-        feriasList = getFeriasFacade().listAll();
-        if (feriasList != null) {
-            for (Ferias f : feriasList) {
-                event = new DefaultScheduleEvent("Férias - " + f.getFiscal().getNome() + " "
-                        + f.getFiscal().getSobrenome(), f.getInicio(), f.getFim());
-                event.setAllDay(true);
-                event.setStyleClass("ferias");
-                eventModel.addEvent(event);
+        List<DefaultScheduleEvent> fds = getFeriadoFacade().getFeriados();
+        if (fds != null) {
+            for (DefaultScheduleEvent f : fds) {
+                this.event = f;
+                this.eventModel.addEvent(this.event);
+            }
+        }
+
+        List<DefaultScheduleEvent> frs = getFeriasFacade().getFerias();
+        if (frs != null) {
+            for (DefaultScheduleEvent f : frs) {
+                this.event = f;
+                this.eventModel.addEvent(this.event);
             }
         }
     }
 
     public void onEventSelect(SelectEvent selectEvent) {
-        event = (DefaultScheduleEvent) selectEvent.getObject();
-        System.out.println(event.getTitle());
-        if (event.getStyleClass().contains("categoria")) {
-            viagem = (Viagem) event.getData();
-            isViagem = true;
-            isFeriado = false;
-            isFerias = false;
-            System.out.println("É UMA VIAGEM");
-        }
-        if (event.getStyleClass().equals("feriado")) {
-            feriado = (Feriado) event.getData();
-            isViagem = false;
-            isFeriado = true;
-            isFerias = false;
-            System.out.println("É UM FERIADO");
-        }
-        if (event.getStyleClass().equals("ferias")) {
-            ferias = (Ferias) event.getData();
-            isViagem = false;
-            isFeriado = false;
-            isFerias = true;
-            System.out.println("SÃO FÉRIAS");
-        }
+        event = (ScheduleEvent) selectEvent.getObject();
+        selectedViagem = (Viagem) event.getData();
     }
+
+//    public void onEventSelect(SelectEvent selectEvent) {
+//        event = (ScheduleEvent) selectEvent.getObject();
+//        System.out.println("EVENTO SELECIONADO!");
+//
+//        if (event != null) {
+//            if (event.getStyleClass().contains("categoria")) {
+//                selectedViagem = (Viagem) event.getData();
+//                isViagem = true;
+//                isFeriado = false;
+//                isFerias = false;
+//                System.out.println("É UMA VIAGEM");
+//            }
+//            if (event.getStyleClass().equals("feriado")) {
+//                feriado = (Feriado) event.getData();
+//                isViagem = false;
+//                isFeriado = true;
+//                isFerias = false;
+//                System.out.println("É UM FERIADO");
+//            }
+//            if (event.getStyleClass().equals("ferias")) {
+//                ferias = (Ferias) event.getData();
+//                isViagem = false;
+//                isFeriado = false;
+//                isFerias = true;
+//                System.out.println("SÃO FÉRIAS");
+//            }
+//        }
+//    }
 }

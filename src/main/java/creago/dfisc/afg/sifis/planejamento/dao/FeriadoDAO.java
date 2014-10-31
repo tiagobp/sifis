@@ -1,10 +1,13 @@
 package creago.dfisc.afg.sifis.planejamento.dao;
 
 import creago.dfisc.afg.sifis.planejamento.entities.Feriado;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.ScheduleEvent;
 
 /**
  *
@@ -36,6 +39,24 @@ public class FeriadoDAO {
     public List<Feriado> findAll() {
         return entityManager.createQuery("FROM " + Feriado.class.getName() + " f ORDER BY f.data")
                 .getResultList();
+    }
+
+    public List<DefaultScheduleEvent> getFeriados() {
+
+        List<DefaultScheduleEvent> events = new ArrayList<>();
+        List<Feriado> feriados = findAll();
+
+        for (Feriado f : feriados) {
+            DefaultScheduleEvent evt = new DefaultScheduleEvent(f.getNome(), f.getData(), f.getData());
+            evt.setAllDay(true);
+            if (f.getCidades() == null || f.getCidades().isEmpty()) {
+                evt.setStyleClass("feriado");
+            } else {
+                evt.setStyleClass("feriadoMunicipal");
+            }
+            events.add(evt);
+        }
+        return events;
     }
 
     public void persist(Feriado feriado) {

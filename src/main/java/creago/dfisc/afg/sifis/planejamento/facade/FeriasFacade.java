@@ -3,6 +3,8 @@ package creago.dfisc.afg.sifis.planejamento.facade;
 import creago.dfisc.afg.sifis.planejamento.dao.FeriasDAO;
 import creago.dfisc.afg.sifis.planejamento.entities.Ferias;
 import java.util.List;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.ScheduleEvent;
 
 /**
  *
@@ -32,5 +34,9 @@ public class FeriasFacade {
 
     public void delete(Ferias ferias) {
         dao.removeById(ferias.getIdferias());
+    }
+
+    public List<DefaultScheduleEvent> getFerias() {
+        return dao.getFerias();
     }
 }

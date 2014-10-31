@@ -3,6 +3,8 @@ package creago.dfisc.afg.sifis.planejamento.facade;
 import creago.dfisc.afg.sifis.planejamento.dao.FeriadoDAO;
 import creago.dfisc.afg.sifis.planejamento.entities.Feriado;
 import java.util.List;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.ScheduleEvent;
 
 /**
  *
@@ -32,5 +34,9 @@ public class FeriadoFacade {
 
     public void delete(Feriado feriado) {
         dao.removeById(feriado.getIdferiado());
+    }
+    
+    public List<DefaultScheduleEvent> getFeriados() {
+        return dao.getFeriados();
     }
 }

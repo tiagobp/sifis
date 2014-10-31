@@ -1,24 +1,28 @@
 package creago.dfisc.afg.sifis.security.entities;
 
-import org.springframework.security.core.GrantedAuthority;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
  * @author creago
  */
-class Role implements GrantedAuthority {
+public class Role implements Serializable {
 
-    private static final long serialVersionUID = -3968396919486158590L;
-    
-    private Long id;
+    private Long idrole;
     private String description;
+    private Set<Usuario> usuarios = new HashSet(0);
 
-    public Long getId() {
-        return id;
+    public Role() {
+    }
+    
+    public Long getIdrole() {
+        return idrole;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdrole(Long idrole) {
+        this.idrole = idrole;
     }
 
     public String getDescription() {
@@ -29,8 +33,11 @@ class Role implements GrantedAuthority {
         this.description = description;
     }
 
-    @Override
-    public String getAuthority() {
-        return description;
+    public Set<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Set<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 }

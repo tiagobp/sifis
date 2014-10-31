@@ -20,6 +20,13 @@
     </properties>
     <dependencies>
         
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+
+        
         <!-- PERSISTENCE -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -126,7 +133,7 @@
         <dependency>  
             <groupId>org.primefaces</groupId>  
             <artifactId>primefaces</artifactId>  
-            <version>5.0</version>  
+            <version>5.1</version>  
         </dependency>
         <dependency>  
             <groupId>org.primefaces.themes</groupId>  
@@ -149,9 +156,29 @@
         
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>4.1.1.RELEASE</version>
+            <artifactId>spring-context</artifactId>
+            <version>3.2.0.RELEASE</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>3.2.0.RELEASE</version>
+        </dependency>
+
 
         <dependency>
             <groupId>commons-logging</groupId>

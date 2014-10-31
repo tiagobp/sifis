@@ -1,10 +1,13 @@
 package creago.dfisc.afg.sifis.planejamento.dao;
 
 import creago.dfisc.afg.sifis.planejamento.entities.Ferias;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.ScheduleEvent;
 
 /**
  *
@@ -35,6 +38,21 @@ public class FeriasDAO {
     public List<Ferias> findAll() {
         return entityManager.createQuery("FROM " + Ferias.class.getName() + " fe ORDER BY fe.inicio DESC")
                 .getResultList();
+    }
+
+    public List<DefaultScheduleEvent> getFerias() {
+
+        List<DefaultScheduleEvent> events = new ArrayList<>();
+        List<Ferias> ferias = findAll();
+
+        for (Ferias f : ferias) {
+            DefaultScheduleEvent evt = new DefaultScheduleEvent("Férias - " + f.getFiscal().getNome() + " "
+                    + f.getFiscal().getSobrenome(), f.getInicio(), f.getFim());
+            evt.setAllDay(true);
+            evt.setStyleClass("ferias");
+            events.add(evt);
+        }
+        return events;
     }
 
     public void persist(Ferias ferias) {

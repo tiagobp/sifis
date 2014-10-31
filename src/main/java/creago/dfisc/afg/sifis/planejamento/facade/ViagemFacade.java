@@ -3,6 +3,8 @@ package creago.dfisc.afg.sifis.planejamento.facade;
 import creago.dfisc.afg.sifis.planejamento.dao.ViagemDAO;
 import creago.dfisc.afg.sifis.planejamento.entities.Viagem;
 import java.util.List;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.ScheduleEvent;
 
 /**
  *
@@ -32,5 +34,9 @@ public class ViagemFacade {
 
     public void delete(Viagem viagem) {
         dao.removeById(viagem.getIdviagem());
+    }
+    
+    public List<DefaultScheduleEvent> getViagens(){
+        return dao.getViagens();
     }
 }

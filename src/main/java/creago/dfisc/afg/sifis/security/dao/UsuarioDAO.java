@@ -1,10 +1,12 @@
-package creago.dfisc.afg.sifis.planejamento.dao;
+package creago.dfisc.afg.sifis.security.dao;
 
 import creago.dfisc.afg.sifis.security.entities.Usuario;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -31,6 +33,21 @@ public class UsuarioDAO {
         return entityManager.find(Usuario.class, id);
     }
 
+    public Usuario getByUsername(final String username) {
+        Usuario user;
+        entityManager.getTransaction().begin();
+        try {
+            Query query = entityManager.createQuery("SELECT u FROM " + Usuario.class.getName() + " u WHERE username = :username", Usuario.class);
+            query.setParameter("username", username);
+            user = (Usuario) query.getSingleResult();
+            entityManager.getTransaction().commit();
+            return user;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return null;
+        }        
+    }
+
     @SuppressWarnings("unchecked")
     public List<Usuario> findAll() {
         return entityManager.createQuery("FROM " + Usuario.class.getName() + " u ORDER BY u.nome, u.sobrenome")
@@ -42,6 +59,7 @@ public class UsuarioDAO {
             entityManager.getTransaction().begin();
             entityManager.persist(usuario);
             entityManager.getTransaction().commit();
+            entityManager.refresh(usuario);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -53,7 +71,6 @@ public class UsuarioDAO {
             entityManager.getTransaction().begin();
             Usuario persisted = getById(usuario.getIdusuario());
             persisted.setNome(usuario.getNome());
-            persisted.setAuthority(usuario.getAuthority());
             persisted.setAvatar(usuario.getAvatar());
             persisted.setEmail(usuario.getEmail());
             persisted.setFiscal(usuario.getFiscal());
@@ -63,6 +80,7 @@ public class UsuarioDAO {
             persisted.setSobrenome(usuario.getSobrenome());
             entityManager.merge(persisted);
             entityManager.getTransaction().commit();
+            entityManager.refresh(usuario);
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();

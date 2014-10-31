@@ -1,6 +1,6 @@
-package creago.dfisc.afg.sifis.planejamento.facade;
+package creago.dfisc.afg.sifis.security.facade;
 
-import creago.dfisc.afg.sifis.planejamento.dao.UsuarioDAO;
+import creago.dfisc.afg.sifis.security.dao.UsuarioDAO;
 import creago.dfisc.afg.sifis.security.entities.Usuario;
 import java.util.List;
 
@@ -22,6 +22,11 @@ public class UsuarioFacade {
 
     public Usuario find(Long entityId) {
         Usuario usuario = dao.getById(entityId);
+        return usuario;
+    }
+    
+    public Usuario find(String username) {
+        Usuario usuario = dao.getByUsername(username);
         return usuario;
     }
 

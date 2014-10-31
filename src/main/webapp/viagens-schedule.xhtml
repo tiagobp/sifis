@@ -24,16 +24,17 @@
                     <h:form id="scheduleform">
                         <p:growl id="messages" showDetail="false" />
                         <p:schedule id="schedulePlanejamento" 
+                                    widgetVar="myschedule"
                                     locale="pt"
                                     style="width: 100%"
                                     maxTime="18pm"
-                                    minTime="8am"
+                                    draggable="false"
+                                    resizable="false"
+                                    minTime="8am" 
                                     allDaySlot="true" 
                                     slotMinutes="600"
                                     axisFormat="HH"
                                     value="#{viagemBean.eventModel}">
-                            <p:ajax event="eventSelect"
-                                    listener="#{viagemBean.onEventSelect}"/>
                         </p:schedule>
                     </h:form>
                 </div>

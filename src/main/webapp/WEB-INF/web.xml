@@ -15,16 +15,21 @@
         <servlet-name>javax.faces.FacesServlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
     <!-- Welcome Page -->
     <welcome-file-list>
-        <welcome-file>login.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     <!-- Primefaces theme configuration -->
     <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>bootstrap</param-value>
     </context-param>
-    
+ 
     <!-- Início das configurações para o Spring Security 3 -->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
@@ -37,6 +42,13 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.xhtml</location>
+    </error-page>
+    <error-page>  
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>  
+        <location>/login.xhtml</location>
+    </error-page>
     <!-- Fim das configuração para utilizar o Spring Security 3 -->
- 
 </web-app>
